@@ -1,0 +1,34 @@
+configuration {
+	modes: "window,run,drun";
+	location: 0;
+	show-icons: true;
+	terminal: "kitty";
+	icon-theme: "Oranchelo";
+	drun-display-format: "{icon} {name}";
+	disable-history: false;
+	sidebar-mode: true;
+	hover-select: true;
+	display-window: " 󰕰  Window";
+	display-run: "   Run ";
+	display-drun: "   Apps ";
+	kb-remove-char-back: "BackSpace,Shift+BackSpace";
+	kb-remove-to-eol: "";
+	kb-accept-entry: "Control+m,Return,KP_Enter";
+	kb-mode-complete: "";
+	kb-row-left: "Control+h";
+	kb-row-right: "Control+l";
+	kb-element-next: "Control+j";
+	kb-element-prev: "Control+k";
+	me-select-entry: "MouseSecondary";
+	me-accept-entry: "MousePrimary";
+	timeout {
+		action: "kb-cancel";
+		delay:  0;
+	}
+	filebrowser {
+		directories-first: true;
+		sorting-method:    "name";
+	}
+}
+
+@theme "catppuccin-mocha"

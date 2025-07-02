@@ -1,0 +1,93 @@
+{
+    "style": {
+        "font": "JetbrainsMono Nerd"
+    },
+    "layer": "top",
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock#date", "clock#time"],
+    "modules-right": ["tray", "custom/update", "network", "battery"],
+
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "persistent-only": true,
+        "format-icons": {
+            "1": " web",
+            "2": " term",
+            "5": " slack",
+            "9": " pass",
+            "10": " email",
+            "default": " any",
+        },
+        "persistent-workspaces": {
+            "DP-4": [ 1,2,3,4,5 ],
+        }
+    },
+    "clock#time": {
+        "format": "󱑂 {:%H:%M}",
+        "tooltip": false,
+        "min-length": 8,
+        "max-length": 8
+    },
+    "clock#date": {
+        "format": "󰨳 {:%d-%m}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "mode"          : "month",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "format": {
+                "months":     "<span color='#ffead3'><b>{}</b></span>",
+                "days":       "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks":      "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays":   "<span color='#ffcc66'><b>{}</b></span>",
+                "today":      "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions":  {
+            "on-click": "shift_reset",
+            "on-click-right": "mode",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+    "custom/update": {
+        "format": "{} {icon}",
+        "return-type": "json",
+        "format-icons": {
+            "has-updates": "󱍷 ",
+            "updated": "󰂪 "
+        },
+        "exec-if": "which waybar-module-pacman-updates",
+        "exec": "waybar-module-pacman-updates  --interval-seconds 60 --network-interval-seconds 300",
+        "on-click": "~/.local/share/bin/update-tmuxified.sh",
+    },
+    "network": {
+        "format-ethernet": " ",
+        "format-wifi": " ",
+        "format-disconnected": "󱘖 ",
+        "tooltip-format-disconnected": "Network Disconnected",
+        "format-disabled": " ",
+        "tooltip-format-disabled": "Network Disabled",
+        "tooltip-format": "{ipaddr}\nUp: {bandwidthUpBits}\nDown:{bandwidthDownBits}",
+    },
+    "battery": {
+        "states": {
+            "full": 100,
+            "good": 96,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-icons": ["󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂"],
+        "format-full": "󰁹 {capacity}%",
+        "format-warning": "󰁻 {capacity}%",
+        "format-critical": "󱃍 {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "tooltip-format": "Discharging: {time}",
+        "tooltip-format-charging": "Charging: {time}",
+        "interval": 1,
+        "min-length": 6,
+        "max-length": 6
+    },
+}
