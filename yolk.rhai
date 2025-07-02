@@ -1,32 +1,23 @@
 export let data = #{
-/*
-    for_vcs: LOCAL,
-    cool_setting: if SYSTEM.hostname == "foo" { 10 } else { 25 }
-*/
+    is_nvidia: if SYSTEM.hostname == "night" { true } else { false }
 };
+
 export let eggs = #{
     alacritty: "~/.config/alacritty/",
     bat: "~/.config/bat/",
     btop: "~/.config/btop/",
     fastfetch: "~/.config/fastfetch/",
-    hypr: "~/.config/hypr/",
+    hypr: #{ targets: "~/.config/hypr/", templates: [ "settings/windowrules.conf" ] },
     kitty: "~/.config/kitty/",
     nvim: "~/.config/nvim/",
     qt5ct: "~/.config/qt5ct/",
     rofi: "~/.config/rofi/",
+    systemd: #{ targets: #{ ".": "~/.config/systemd/user/" }, strategy: "merge" },
     tio: "~/.config/tio/",
     tmux: "~/.config/tmux/",
-    uwsm: "~/.config/uwsm/",
+    xdg: #{ targets: #{ "user-dirs.dirs": "~/.config/user-dirs.dirs" }, },
+    uwsm: #{ targets: "~/.config/uwsm/", templates: [ "env" ] },
     waybar: "~/.config/waybar/",
     wlogout: "~/.config/wlogout/",
+    zsh: #{ targets: #{ ".zshrc": "~/.zshrc" }, },
 };
-
-/* Example of eggs config section
-export let eggs = #{
-    alacritty: #{
-        targets: "~/.config/alacritty/",
-        templates: [],
-        enabled: false
-    }
-};
-*/

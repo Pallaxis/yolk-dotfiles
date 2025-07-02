@@ -1,0 +1,6 @@
+[Unit]
+Description=tests syncthing folders for conflicts and reports any found
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/env bash %h/.local/share/bin/syncthing-conflict-notifier.sh

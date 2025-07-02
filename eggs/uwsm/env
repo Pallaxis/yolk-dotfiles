@@ -38,3 +38,21 @@ export VISUAL=nvim
 # Enables mangohud (Makes loads of applications unusable)
 #export MANGOHUD=1
 #export MANGOHUD_DLSYM=1 # not sure if this was meant to be commented
+
+{% if data.is_nvidia %}
+#<yolk> # █▄░█ █░█ █ █▀▄ █ ▄▀█
+#<yolk> # █░▀█ ▀▄▀ █ █▄▀ █ █▀█
+
+#<yolk> # See https://wiki.hyprland.org/Nvidia/
+
+#<yolk> #export LIBVA_DRIVER_NAME=nvidia
+#<yolk> #export __GLX_VENDOR_LIBRARY_NAME=nvidia
+#<yolk> #export __GL_VRR_ALLOWED=1
+#<yolk> #export WLR_NO_HARDWARE_CURSORS=1
+#<yolk> #export WLR_DRM_NO_ATOMIC=1
+
+#<yolk> export LIBVA_DRIVER_NAME=nvidia
+#<yolk> export GBM_BACKEND=nvidia-drm
+#<yolk> export __GLX_VENDOR_LIBRARY_NAME=nvidia # this might cause my discord streams to not work
+#<yolk> export WLR_NO_HARDWARE_CURSORS=1
+{% end %}
