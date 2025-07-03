@@ -34,6 +34,7 @@ while true do
 
 	write("tek_ota --bootloader-version\n")
 	write("oclea_info\n")
+	write("rm .bash_history\n")
 
 	expect("login: ")
 end

@@ -4,8 +4,8 @@
     },
     "layer": "top",
     "modules-left": ["hyprland/workspaces"],
-    "modules-center": ["clock#date", "clock#time"],
-    "modules-right": ["tray", "custom/update", "network", "battery"],
+    "modules-center": ["clock#date", "idle_inhibitor", "clock#time"],
+    "modules-right": ["tray", "custom/update", "network", "custom/cpu-usage", "custom/cpu-temp", "battery"],
 
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -21,6 +21,13 @@
         "persistent-workspaces": {
             "DP-4": [ 1,2,3,4,5 ],
         }
+    },
+    "idle_inhibitor": {
+        "format": "",
+        "tooltip": true,
+        "tooltip-format-activated": "Idle Inhibited",
+        "tooltip-format-deactivated": "Able to idle",
+        "start-activated": false
     },
     "clock#time": {
         "format": "󱑂 {:%H:%M}",
@@ -70,6 +77,23 @@
         "format-disabled": " ",
         "tooltip-format-disabled": "Network Disabled",
         "tooltip-format": "{ipaddr}\nUp: {bandwidthUpBits}\nDown:{bandwidthDownBits}",
+    },
+    "custom/cpu-temp": {
+        "exec": "~/.config/waybar/scripts/cpu-temp.sh",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": true,
+        "interval": 5,
+        "min-length": 8,
+        "max-length": 8
+    },
+    "custom/cpu-usage": {
+        "exec": "~/.config/waybar/scripts/cpu-usage.sh",
+        "return-type": "json",
+        "tooltip": true,
+        "interval": 5,
+        "min-length": 6,
+        "max-length": 6
     },
     "battery": {
         "states": {
