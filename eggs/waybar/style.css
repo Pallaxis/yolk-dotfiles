@@ -3,6 +3,7 @@
   font-family: "JetbrainsMono Nerd", monospace;
   font-size: 12px;
   color: white;
+  text-shadow: 0 0 1.5px rgba(0, 0, 0, 1);
 }
 
 /* Sets bar transparent */
@@ -40,7 +41,6 @@ window#waybar {
 
 #idle_inhibitor {
   font-size: 15pt;
-  text-shadow: 0 0 1.5px rgba(0, 0, 0, 1);
   min-width: 24px;  /* keeps the icon from collapsing */
   padding-left: 14px;
   padding-right: 16px;
