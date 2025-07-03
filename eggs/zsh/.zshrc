@@ -24,6 +24,25 @@ stty -ixoff											# Disables sending of start/stop characters
 export FZF_CTRL_T_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git "
 export FZF_DEFAULT_OPTS='--color="query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7"'
 
+# Functions
+stopwatch() {
+    start=$(date +%s)
+    while true; do
+	time="$(($(date +%s) - $start))"
+	printf '%s\r' "$(date -u -d "@$time" +%H:%M:%S)"
+    done
+}
+countdown() {
+    start="$(( $(date '+%s') + $1))"
+    while [ $start -ge $(date +%s) ]; do
+	time="$(( $start - $(date +%s) ))"
+	printf '%s\r' "$(date -u -d "@$time" +%H:%M:%S)"
+	sleep 0.1
+    done
+    notify-send Countdown Completed!
+}
+
+
 # Zinit stuff
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"				# Set the directory we want to store zinit and plugins
 if [ ! -d "$ZINIT_HOME" ]; then									# Download Zinit, if it's not there yet
@@ -111,6 +130,11 @@ alias lm='eza --icons=auto --sort=modified --reverse --long --modified --header 
 alias tree='eza --tree --icons=auto'								# Same as tree but with colours
 alias cat='bat --paging=never --style=plain'					# Cat but with colors
 
+#pacman -Qeq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
+#pacman -Qdtq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rns {})'
+#pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
+
+
 # Handy change dir shortcuts
 alias -- -='cd -'
 alias ..='cd ..'
@@ -133,6 +157,8 @@ alias ffplay="ffplay -fflags nobuffer -flags low_delay -probesize 32 -analyzedur
 # Shell integrations
 eval "$(batman --export-env)"
 eval "$(fzf --zsh)"
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
+# {% if SYSTEM.hostname == "thinkpad" %}
+#<yolk> export PYENV_ROOT="$HOME/.pyenv"
+#<yolk> [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+#<yolk> eval "$(pyenv init - zsh)"
+# {% end %}

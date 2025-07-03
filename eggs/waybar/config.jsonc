@@ -60,7 +60,7 @@
         },
         "exec-if": "which waybar-module-pacman-updates",
         "exec": "waybar-module-pacman-updates  --interval-seconds 60 --network-interval-seconds 300",
-        "on-click": "~/.local/share/bin/update-tmuxified.sh",
+        "on-click": "~/.config/waybar/scripts/update-tmuxified.sh",
     },
     "network": {
         "format-ethernet": " ",
