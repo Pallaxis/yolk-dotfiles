@@ -5,7 +5,7 @@
     "layer": "top",
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock#date", "idle_inhibitor", "clock#time"],
-    "modules-right": ["tray", "custom/update", "network", "custom/cpu-usage", "custom/cpu-temp", "battery"],
+    "modules-right": ["tray", "custom/kernel-check", "custom/update", "network", "custom/cpu-usage", "custom/cpu-temp", "battery"],
 
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -58,6 +58,12 @@
             "on-scroll-down": "shift_down"
         }
     },
+    "custom/kernel-check": {
+        "exec": "~/.config/waybar/scripts/kernel-module-check.sh",
+        "return-type": "json",
+        "interval": 300,
+        "format": "{}",  // Let JSON define format
+    },
     "custom/update": {
         "format": "{} {icon}",
         "return-type": "json",
@@ -78,6 +84,14 @@
         "tooltip-format-disabled": "Network Disabled",
         "tooltip-format": "{ipaddr}\nUp: {bandwidthUpBits}\nDown:{bandwidthDownBits}",
     },
+    "custom/cpu-usage": {
+        "exec": "~/.config/waybar/scripts/cpu-usage.sh",
+        "return-type": "json",
+        "tooltip": true,
+        "interval": 5,
+        "min-length": 6,
+        "max-length": 6
+    },
     "custom/cpu-temp": {
         "exec": "~/.config/waybar/scripts/cpu-temp.sh",
         "return-type": "json",
@@ -86,14 +100,6 @@
         "interval": 5,
         "min-length": 8,
         "max-length": 8
-    },
-    "custom/cpu-usage": {
-        "exec": "~/.config/waybar/scripts/cpu-usage.sh",
-        "return-type": "json",
-        "tooltip": true,
-        "interval": 5,
-        "min-length": 6,
-        "max-length": 6
     },
     "battery": {
         "states": {
