@@ -42,8 +42,8 @@ window#waybar {
   font-size: 15pt;
   text-shadow: 0 0 1.5px rgba(0, 0, 0, 1);
   min-width: 24px;  /* keeps the icon from collapsing */
-  padding-left: 6px;
-  padding-right: 12px;
+  padding-left: 14px;
+  padding-right: 16px;
   margin-left: 0px;
   margin-right: 0px;
 }
