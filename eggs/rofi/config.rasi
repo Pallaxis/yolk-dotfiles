@@ -2,7 +2,7 @@ configuration {
 	modes: "window,run,drun";
 	location: 0;
 	show-icons: true;
-	terminal: "kitty";
+	terminal: "alacritty";
 	icon-theme: "Oranchelo";
 	drun-display-format: "{icon} {name}";
 	disable-history: false;
