@@ -22,7 +22,7 @@ stty -ixoff											# Disables sending of start/stop characters
 #export XDG_CACHE_HOME=$HOME/.cache/
 
 export FZF_CTRL_T_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git "
-export FZF_DEFAULT_OPTS='--color="query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7"'
+export FZF_DEFAULT_OPTS='--preview-window=up:70% --color="query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7"'
 
 # Functions
 stopwatch() {
@@ -73,11 +73,18 @@ zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-zstyle ':fzf-tab:complete:vi:*' fzf-preview 'bat $realpath'
-zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'bat $realpath'
+#zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+#zstyle ':fzf-tab:complete:vi:*' fzf-preview 'bat ${(Q)realpath}'
+#zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'bat $realpath'
 zstyle ':fzf-tab:*' default-color ""
 zstyle ':fzf-tab:*' fzf-flags --color="query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7"
+zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
+zstyle ':fzf-tab:*' popup-min-size 200 40
+zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word' # Systemctl status
+zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}' # environment variables
+
+zstyle ':fzf-tab:complete:*:*' fzf-preview 'less ${(Q)realpath}' # supposed to intelligently show previews for different filetypes by using different tools
+export LESSOPEN='|~/.local/share/bin/lessfilter.sh %s'
 
 #Prompt styling
 zstyle :prompt:pure:git:stash show yes
