@@ -43,7 +43,7 @@ window#waybar {
   font-size: 15pt;
   min-width: 24px;  /* keeps the icon from collapsing */
   padding-left: 14px;
-  padding-right: 16px;
+  padding-right: 18px;
   margin-left: 0px;
   margin-right: 0px;
 }

@@ -19,7 +19,8 @@
             "default": " any",
         },
         "persistent-workspaces": {
-            "DP-4": [ 1,2,3,4,5 ],
+            "*": [ 1,2,3,4,5 ],
+            "eDP-1": [ 6,7,8,9,10 ],
         }
     },
     "idle_inhibitor": {
@@ -73,7 +74,7 @@
         },
         "exec-if": "which waybar-module-pacman-updates",
         "exec": "waybar-module-pacman-updates  --interval-seconds 60 --network-interval-seconds 300",
-        "on-click": "~/.local/share/bin/update-tmuxified.sh",
+        "on-click": "~/.config/waybar/scripts/update-tmuxified.sh",
     },
     "network": {
         "on-click": "~/.config/waybar/scripts/attach-with-command.sh nmtui",
