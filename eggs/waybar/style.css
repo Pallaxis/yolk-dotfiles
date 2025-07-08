@@ -51,6 +51,6 @@ window#waybar {
   color: red;
 }
 
-#network, #battery, #custom-update, #tray {
+#custom-update, #network, #battery, #tray {
   padding: 0px 5px;
 }

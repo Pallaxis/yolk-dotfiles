@@ -164,8 +164,3 @@ alias ffplay="ffplay -fflags nobuffer -flags low_delay -probesize 32 -analyzedur
 # Shell integrations
 eval "$(batman --export-env)"
 eval "$(fzf --zsh)"
-# {% if SYSTEM.hostname == "thinkpad" %}
-#<yolk> export PYENV_ROOT="$HOME/.pyenv"
-#<yolk> [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-#<yolk> eval "$(pyenv init - zsh)"
-# {% end %}

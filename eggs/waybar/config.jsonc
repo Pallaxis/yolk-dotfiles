@@ -5,7 +5,7 @@
     "layer": "top",
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock#date", "idle_inhibitor", "clock#time"],
-    "modules-right": ["tray", "custom/kernel-check", "custom/update", "network", "custom/cpu-usage", "custom/cpu-temp", "battery"],
+    "modules-right": ["custom/kernel-check", "tray", "custom/update", "network", "custom/cpu-usage", "custom/cpu-temp", "pulseaudio", "battery"],
 
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -102,6 +102,22 @@
         "interval": 5,
         "min-length": 8,
         "max-length": 8
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": "󰝟 {volume}%",
+        "format-icons": {
+            "default": ["󰕿", "󰖀", "󰕾"],
+            "headphone": "󰋋",
+            "headset": "󰋋"
+        },
+        "tooltip": true,
+        "tooltip-format": "Device: {desc}",
+        "on-click": "uwsm app -- pavucontrol",
+        "on-scroll-up": "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-",
+        "min-length": 6,
+        "max-length": 6
     },
     "battery": {
         "states": {

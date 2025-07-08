@@ -274,6 +274,7 @@ return {
         "pyright", -- Python static type checker
         "yaml-language-server", -- yaml
         "hyprls", -- Hyprlang
+        "qmlls", -- qml
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
