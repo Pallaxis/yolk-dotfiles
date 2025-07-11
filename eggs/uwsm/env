@@ -3,6 +3,9 @@
 
 # See https://wiki.hyprland.org/Configuring/Environment-variables/
 
+# Cursors - Hyprcursor is in env-hyprland
+export XCURSOR_THEME=Bibata-Modern-Ice
+
 # Not needed to export XDG with UWSM
 export XDG_CURRENT_DESKTOP=Hyprland
 export XDG_SESSION_TYPE=wayland
