@@ -48,8 +48,13 @@ if [ ! -d "$ZINIT_HOME" ]; then									# Download Zinit, if it's not there yet
 fi
 source "${ZINIT_HOME}/zinit.zsh"								# Source/Load zinit
 
-# Path
-path=("$HOME/.local/share/bin" $path)
+# Checks a dir exists & is not in path, then prepends to PATH
+add_paths() {
+  for directory in "$@"; do
+    [[ -d "$directory" && ! "$PATH" =~ (^|:)$directory(:|$) ]] && PATH="$directory:$PATH"
+  done
+}
+add_paths ~/.local/bin ~/.local/share/bin
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -65,14 +70,12 @@ zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
 
 
-# Completion styling
+# Completion
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
-#zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-#zstyle ':fzf-tab:complete:vi:*' fzf-preview 'bat ${(Q)realpath}'
-#zstyle ':fzf-tab:complete:nvim:*' fzf-preview 'bat $realpath'
+# fzf-tab
 zstyle ':fzf-tab:*' fzf-preview '[[ -d $realpath ]] && eza -1 --icons=auto $realpath || bat --paging=never --style=plain --color=always $realpath' # Shows ls or bat based on context
 zstyle ':fzf-tab:*' default-color "" # Color when there is no group
 zstyle ':fzf-tab:*' fzf-flags --color="query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7" # Catppuccin colors
@@ -81,21 +84,13 @@ zstyle ':fzf-tab:*' popup-min-size 200 40 # Sizes for tmux window
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word' # Systemctl status
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}' # Environment variables
 
-#Prompt styling
+# Prompt styling
 zstyle :prompt:pure:git:stash show yes
 zstyle ':prompt:pure:prompt:success' color '#cba6f7'
 zstyle ':prompt:pure:prompt:error' color '#f38ba8'
 zstyle ':prompt:pure:prompt:continuation' color '#cba6f7'
 zstyle ':prompt:pure:git:branch' color '#b4befe'
 zstyle ':prompt:pure:git:dirty' color '#f2cdcd'
-
-# Load completions (Must be done after fzf-tab)
-autoload -Uz compinit && compinit
-zinit cdreplay -q
-
-# Loading prompt
-autoload -U promptinit; promptinit
-prompt pure
 
 # Keybindings
 WORDCHARS=${WORDCHARS/\/}							# Allows deleting up to / as a word
@@ -131,6 +126,7 @@ alias lc='eza --icons=auto --sort=created --reverse --long --created --header --
 alias lm='eza --icons=auto --sort=modified --reverse --long --modified --header --no-permissions --no-filesize --no-user'		# Sorts most recently modified at the top
 alias tree='eza --tree --icons=auto'								# Same as tree but with colours
 alias cat='bat --paging=never --style=plain'					# Cat but with colors
+alias diff='diff --color'							# Enables color for diffs
 
 #pacman -Qeq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
 #pacman -Qdtq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rns {})'
@@ -155,6 +151,14 @@ alias oraclebox='~/.secrets/oraclebox'
 alias sudo='sudo '
 alias vi='nvim'
 alias ffplay="ffplay -fflags nobuffer -flags low_delay -probesize 32 -analyzeduration 1"
+
+# Load completions (Must be done after fzf-tab)
+autoload -Uz compinit && compinit
+zinit cdreplay -q
+
+# Loading prompt
+autoload -U promptinit; promptinit
+prompt pure
 
 # Shell integrations
 eval "$(batman --export-env)"
