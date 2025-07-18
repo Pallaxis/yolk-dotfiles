@@ -54,7 +54,7 @@ add_paths() {
     [[ -d "$directory" && ! "$PATH" =~ (^|:)$directory(:|$) ]] && PATH="$directory:$PATH"
   done
 }
-add_paths ~/.local/bin ~/.local/share/bin
+add_paths ~/.local/bin
 
 # Add in zsh plugins
 zinit light zsh-users/zsh-syntax-highlighting
@@ -124,9 +124,6 @@ alias ll='eza -lhag --icons=auto --sort=name --group-directories-first'		# Long 
 alias ld='eza -lhD --icons=auto'						# Long list dirs
 alias lc='eza --icons=auto --sort=created --reverse --long --created --header --no-permissions --no-filesize --no-user'		# Sorts most recently created at the top
 alias lm='eza --icons=auto --sort=modified --reverse --long --modified --header --no-permissions --no-filesize --no-user'		# Sorts most recently modified at the top
-alias tree='eza --tree --icons=auto'								# Same as tree but with colours
-alias cat='bat --paging=never --style=plain'					# Cat but with colors
-alias diff='diff --color'							# Enables color for diffs
 
 #pacman -Qeq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
 #pacman -Qdtq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rns {})'
@@ -151,6 +148,10 @@ alias oraclebox='~/.secrets/oraclebox'
 alias sudo='sudo '
 alias vi='nvim'
 alias ffplay="ffplay -fflags nobuffer -flags low_delay -probesize 32 -analyzeduration 1"
+alias tree='eza --tree --icons=auto'								# Same as tree but with colours
+alias cat='bat --paging=never --style=plain'					# Cat but with colors
+alias diff='diff --color'							# Enables color for diffs
+alias info='info --vi-keys'
 
 # Load completions (Must be done after fzf-tab)
 autoload -Uz compinit && compinit

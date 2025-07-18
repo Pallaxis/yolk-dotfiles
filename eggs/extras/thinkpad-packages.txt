@@ -16,6 +16,8 @@ brightnessctl
 btop
 calc
 caligula
+chaotic-keyring
+chaotic-mirrorlist
 chezmoi
 chromium
 cowsay
@@ -47,6 +49,7 @@ hyprland-git
 hyprlang-git
 hyprlock
 hyprpaper
+hyprpolkitagent
 hyprutils-git
 hyprwayland-scanner-git
 imagemagick

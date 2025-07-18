@@ -5,7 +5,7 @@ export let data = #{
 export let eggs = #{
     alacritty: "~/.config/alacritty/",
     bat: "~/.config/bat/",
-    bin: #{ targets: "~/.local/share/bin/", strategy: "merge" },
+    bin: #{ targets: "~/.local/bin/", strategy: "merge" },
     btop: "~/.config/btop/",
     fastfetch: "~/.config/fastfetch/",
     hypr: #{ targets: "~/.config/hypr/", templates: [ "settings/windowrules.conf" ] },

@@ -3,12 +3,12 @@
 UPDATE_SESSION="Update"
 
 # Create a new session (in background)
-#tmux new-session -n "$UPDATE_SESSION" -s "$UPDATE_SESSION" ~/.local/share/bin/update.sh
+#tmux new-session -n "$UPDATE_SESSION" -s "$UPDATE_SESSION" ~/.local/bin/update.sh
 
 # If theres no session named Update, create it and send the command as a key so it doesn't exit on complete
 if ! tmux has-session -t "$UPDATE_SESSION"; then
     tmux new-session -n "$UPDATE_SESSION" -s "$UPDATE_SESSION" -d
-    tmux send-keys -t "$UPDATE_SESSION" "~/.local/share/bin/update.sh" Enter
+    tmux send-keys -t "$UPDATE_SESSION" "~/.local/bin/update.sh" Enter
 fi
 
 # Find the first attached client (if any)
