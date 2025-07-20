@@ -2,8 +2,8 @@
 
 main() {
 	fastfetch
-	sudo pacman -Syu --noconfirm
-	yay -a --answerdiff=All --answerclean=None
+	#sudo pacman -Syu --noconfirm
+	yay --answerdiff=All --answerclean=None --noconfirm
 	echo
 	read -p "Update Flatpak packages? [Y/n]"$'\n> ' yn
 	case $yn in
