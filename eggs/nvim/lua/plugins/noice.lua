@@ -1,4 +1,5 @@
 return {
+  -- pretty looking messages, command mode etc
   "folke/noice.nvim",
   event = "VeryLazy",
   opts = {
