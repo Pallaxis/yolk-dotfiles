@@ -35,9 +35,6 @@ window#waybar {
 #workspaces button.visible {
   border-top: 2px solid #cba6f7;
 }
-#workspaces button:hover {
-  border-color: transparent;
-}
 
 #idle_inhibitor {
   font-size: 15pt;

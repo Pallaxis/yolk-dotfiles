@@ -7,6 +7,7 @@ export let eggs = #{
     bat: "~/.config/bat/",
     bin: #{ targets: "~/.local/bin/", strategy: "merge" },
     btop: "~/.config/btop/",
+    dunst: "~/.config/dunst/",
     fastfetch: "~/.config/fastfetch/",
     hypr: #{ targets: "~/.config/hypr/", templates: [ "settings/windowrules.conf" ] },
     kitty: "~/.config/kitty/",
