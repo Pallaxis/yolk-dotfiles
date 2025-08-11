@@ -5,7 +5,7 @@
     "layer": "top",
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock#date", "idle_inhibitor", "clock#time"],
-    "modules-right": ["custom/kernel-check", "tray", "custom/update", "network", "custom/cpu-usage", "custom/cpu-temp", "pulseaudio", "battery", "custom/notification"],
+    "modules-right": ["custom/kernel-check", "tray", "custom/update", "network", "custom/cpu-usage", "custom/cpu-temp", "pulseaudio", "battery", "custom/notifications"],
 
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -138,24 +138,12 @@
         "min-length": 6,
         "max-length": 6
     },
-    "custom/notification": {
-        "tooltip": false,
-        "format": "{icon}",
-        "format-icons": {
-            "notification": "<span foreground='red'><sup></sup></span>",
-            "none": "",
-            "dnd-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-none": "",
-            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "inhibited-none": "",
-            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-            "dnd-inhibited-none": ""
-        },
+    "custom/notifications": {
+        "exec": "~/.config/waybar/scripts/notifications.sh",
         "return-type": "json",
-        "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
-        "escape": true
+        "format": "{}",
+        "tooltip": true,
+        "interval": 5,
+        "on-click": "dunstctl history-clear"
     },
 }

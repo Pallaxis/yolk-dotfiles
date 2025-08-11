@@ -12,6 +12,8 @@ export let eggs = #{
     hypr: #{ targets: "~/.config/hypr/", templates: [ "settings/windowrules.conf" ] },
     kitty: "~/.config/kitty/",
     nvim: "~/.config/nvim/",
+    qt5ct: "~/.config/qt5ct/",
+    qt6ct: "~/.config/qt6ct/",
     rofi: "~/.config/rofi/",
     share: #{ targets: #{ "rofi" : "~/.local/share/rofi", }, },
     systemd: #{ targets: "~/.config/systemd/user/", strategy: "merge" },
