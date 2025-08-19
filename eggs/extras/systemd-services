@@ -1,2 +1,8 @@
-systemctl --user enable --now hyprpaper.service
-systemctl --user enable --now hypridle.service
+hyprpaper.service
+hypridle.service
+waybar.service
+ssh-agent.service
+hyprpolkitagent.service
+pipewire
+pipewire-pulse
+wireplumber

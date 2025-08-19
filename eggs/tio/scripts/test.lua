@@ -1,37 +1,26 @@
--- stupid copilot script that doesn't do what i want it to do even remotely
-local coroutine = coroutine
-
-function shell_ready()
-    expect("~]# ")
+function Shell_Ready()
+	expect("~]# ")
 end
 
-local function automation()
-    write("\n")
+write("\n")
 
-    if expect("~]# ", 100) == 0 then
-        write("\n")
-        expect("login: ")
-        write("root\n")
-        shell_ready()
-    end
-
-    write("clear\n")
-
-    expect("rand")
+if expect("~]# ", 100) == 0 then
+	write("\n")
+	expect("login: ")
+	write("root\n")
+	Shell_Ready()
 end
+--write([[echo -e "\e[33mProbe status: $(x cert probe 2>&1 | awk '/status_text/ {print $2}')\e[0m"]])
+--write("\n")
 
--- Wrap the script in a coroutine
-local script = coroutine.create(automation)
+--write([[echo -e "\e[33mVerify status: $(x cert verify 2>&1 | awk '/status_text/ {print $2}')\e[0m"]])
+--write("\n")
 
--- Periodically resume the coroutine
-while true do
-    local status, err = coroutine.resume(script)
-    if not status then
-        print("Error: " .. err)
-        break
-    end
+--write([[echo -e "\e[33mManifest status: $(x manifest 2>&1 | awk '/status_text/ {print $2}')\e[0m"]])
+--write("\n")
 
-    -- Introduce a short delay or yield control to allow manual input
-    os.execute("sleep 0.1") -- Adjust this for your environment
-end
+write("tek_ota --bootloader-version\n")
+write("oclea_info\n")
+write("rm .bash_history\n")
 
+expect("login: ")

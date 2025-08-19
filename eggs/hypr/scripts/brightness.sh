@@ -16,6 +16,7 @@ restore_brightness(){
     brightnessctl -r			    # Monitor backlight restore.
 
     previous=$(cat $XDG_CACHE_HOME/monitor-save/value)
+    sleep 3
     ddcutil setvcp 0x10 $previous
 }
 

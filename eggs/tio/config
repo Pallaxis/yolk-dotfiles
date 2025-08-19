@@ -1,10 +1,10 @@
 [default]
 
-[evk2]
-device = /dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_DT03T0N7-if00-port0
-script-file = 1
-color = 13
+[evk]
+device = /dev/serial/by-id/^usb-FTDI_[A-Z0-9]{6}_Basic_UART_[A-Z0-9]{8}-if00-port0$
+color = 16
 
-[evk-red]
-device = /dev/serial/by-id/usb-FTDI_FT230X_Basic_UART_DT03TUPT-if00-port0
-color = 13
+[usb-devices]
+pattern = ^usb([0-9]*)
+device = /dev/ttyUSB%m1
+color = 14
