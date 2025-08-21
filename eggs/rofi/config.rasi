@@ -1,3 +1,5 @@
+@theme "catppuccin-mocha"
+
 configuration {
 	modes: "window,run,drun";
 	location: 0;
@@ -30,5 +32,3 @@ configuration {
 		sorting-method:    "name";
 	}
 }
-
-@theme "catppuccin-mocha"

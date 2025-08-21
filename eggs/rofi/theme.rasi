@@ -5,7 +5,7 @@
 */
 
 * {
-  main-bg:        #11111b;
+  main-bg:        #1e1e2e;
   main-fg:        #cdd6f4;
   main-br:        #9399b2;
   input-bg:       #181825;

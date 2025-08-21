@@ -15,7 +15,7 @@ export let eggs = #{
     qt5ct: "~/.config/qt5ct/",
     qt6ct: "~/.config/qt6ct/",
     rofi: "~/.config/rofi/",
-    share: #{ targets: #{ "rofi" : "~/.local/share/rofi", }, },
+    //share: #{ targets: #{ "rofi" : "~/.local/share/rofi", }, },
     systemd: #{ targets: "~/.config/systemd/user/", strategy: "merge" },
     tio: "~/.config/tio/",
     tmux: "~/.config/tmux/",

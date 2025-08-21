@@ -1,30 +1,32 @@
-/* Power menu */
+@theme "catppuccin-mocha"
 
 configuration {
-  font:                     "JetBrainsMono Nerd Font 8";
+  font:             "JetBrainsMono Nerd Font 12";
+  kb-remove-to-eol: "";
+  kb-accept-entry: "Control+m,Return,KP_Enter";
+  kb-mode-complete: "";
+  kb-element-next: "Control+j";
+  kb-element-prev: "Control+k";
+  me-select-entry: "MouseSecondary";
+  me-accept-entry: "MousePrimary";
+  hover-select: true;
 }
-
-@theme                      "~/.config/rofi/theme.rasi"
 
 /* Window */
 
 window {
-  location:                 northeast;
-  anchor:                   north;
-  x-offset:                 -3px;
-  y-offset:                 3px;
-  width:                    150px;
+  width:                    350px;
   border:                   2px;
   border-radius:            10px;
-  border-color:             @main-br;
-  background-color:         @main-bg;
   children:                 [ mainbox ];
 }
 
 mainbox {
   background-color:         inherit;
-  text-color:               @main-fg;
-  children:                 [ listview ];
+}
+
+inputbar {
+  prompt: "test";
 }
 
 /* List */
@@ -39,12 +41,9 @@ element {
   padding:                  6px;
   cursor:                   pointer;
   background-color:         inherit;
-  text-color:               @main-fg;
 }
 element selected.normal {
   border-radius:            6px;
-  background-color:         @select-bg;
-  text-color:               @select-fg;
 }
 element-text {
   padding:                  0 6px;
