@@ -13,3 +13,6 @@ pacman -Qet # packages explicitly installed and not required as deps
 vi sort and replace:
 Sort the file using :sort
 Execute command :g/^\(.*\)$\n\1$/p
+
+if the AUR is ever down:
+Packages: We maintain a mirror of AUR packages on GitHub. You can retrieve a package using: $ git clone --branch <package_name> --single-branch https://github.com/archlinux/aur.git <package_name>
