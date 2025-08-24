@@ -7,6 +7,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
   end,
 })
 
+-- Returns to the line from the last time it was in the buffer
 vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = "*",
   callback = function()
@@ -15,6 +16,14 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     if mark[1] > 0 and mark[1] <= lcount then
       pcall(vim.api.nvim_win_set_cursor, 0, mark)
     end
+  end,
+})
+
+-- Stops auto commenting newlines
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "c", "r", "o" })
   end,
 })
 
