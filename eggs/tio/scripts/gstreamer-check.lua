@@ -1,19 +1,19 @@
 function shell_ready()
-	expect("~]# ")
+	tio.expect("~]# ")
 end
 
-write("\n")
+tio.write("\n")
 
 while true do
-	if expect("~]# ", 100) == 0 then
-		write("\n")
-		expect("login: ")
-		write("root\n")
+	if not tio.expect("~]# ", 100) then
+		tio.write("\n")
+		tio.expect("login: ")
+		tio.write("root\n")
 		shell_ready()
 	end
-	write("clear\n")
+	tio.write("clear\n")
 
-	write("oclea_gstreamer_interactive_example -r\n")
+	tio.write("oclea_gstreamer_vout_example\n")
 
-	expect("login: ")
+	tio.expect("login: ")
 end

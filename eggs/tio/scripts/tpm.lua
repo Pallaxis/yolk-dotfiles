@@ -1,28 +1,28 @@
 function Shell_Ready()
-	expect("~]# ")
+	tio.expect("~]# ")
 end
 
-write("\n")
+tio.write("\n")
 
 while true do
-	if expect("~]# ", 100) == 0 then
-		write("\n")
-		expect("login: ")
-		write("root\n")
+	if not tio.expect("~]# ", 100) then
+		tio.write("\n")
+		tio.expect("login: ")
+		tio.write("root\n")
 		Shell_Ready()
 	end
-	--write([[echo -e "\e[33mProbe status: $(x cert probe 2>&1 | awk '/status_text/ {print $2}')\e[0m"]])
-	--write("\n")
+	--tio.write([[echo -e "\e[33mProbe status: $(x cert probe 2>&1 | awk '/status_text/ {print $2}')\e[0m"]])
+	--tio.write("\n")
 
-	--write([[echo -e "\e[33mVerify status: $(x cert verify 2>&1 | awk '/status_text/ {print $2}')\e[0m"]])
-	--write("\n")
+	--tio.write([[echo -e "\e[33mVerify status: $(x cert verify 2>&1 | awk '/status_text/ {print $2}')\e[0m"]])
+	--tio.write("\n")
 
-	--write([[echo -e "\e[33mManifest status: $(x manifest 2>&1 | awk '/status_text/ {print $2}')\e[0m"]])
-	--write("\n")
+	--tio.write([[echo -e "\e[33mManifest status: $(x manifest 2>&1 | awk '/status_text/ {print $2}')\e[0m"]])
+	--tio.write("\n")
 
-	write("tek_ota --bootloader-version\n")
-	write("oclea_info\n")
-	write("rm .bash_history\n")
+	tio.write("tek_ota --bootloader-version\n")
+	tio.write("oclea_info\n")
+	tio.write("rm .bash_history\n")
 
-	expect("login: ")
+	tio.expect("login: ")
 end
