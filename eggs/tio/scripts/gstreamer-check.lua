@@ -13,7 +13,10 @@ while true do
 	end
 	tio.write("clear\n")
 
-	tio.write("oclea_gstreamer_vout_example\n")
+	tio.write("oclea_gstreamer_interactive_example -V\n")
+	tio.expect(">>>")
+
+	tio.write("vout set zoom 5\nvout set offset-x 1400\nvout set offset-y 800\n")
 
 	tio.expect("login: ")
 end

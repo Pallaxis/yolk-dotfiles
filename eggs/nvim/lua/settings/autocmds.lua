@@ -20,6 +20,7 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- Stops auto commenting newlines
+-- NOTE: It may be a good idea to find what plugin sets this and just have it not set it
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "*",
   callback = function()
