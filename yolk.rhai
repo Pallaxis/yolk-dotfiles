@@ -20,6 +20,7 @@ export let eggs = #{
     systemd: #{ targets: "~/.config/systemd/user/", strategy: "merge" },
     tio: "~/.config/tio/",
     tmux: "~/.config/tmux/",
+    udiskie: "~/.config/udiskie/",
     xdg: #{ targets: #{ "user-dirs.dirs": "~/.config/user-dirs.dirs" }, },
     uwsm: #{ targets: "~/.config/uwsm/", templates: [ "env" ] },
     wallpapers: "~/.local/share/wallpapers/",
