@@ -15,6 +15,7 @@ export let eggs = #{
     nvim: "~/.config/nvim/",
     qt5ct: "~/.config/qt5ct/",
     qt6ct: "~/.config/qt6ct/",
+    qutebrowser: #{ targets: "~/.config/qutebrowser/", strategy: "merge" },
     rofi: "~/.config/rofi/",
     share: #{ enabled: false },
     systemd: #{ targets: "~/.config/systemd/user/", strategy: "merge" },
