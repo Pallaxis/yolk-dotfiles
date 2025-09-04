@@ -1,4 +1,4 @@
 device_config:
   # Ignore systemd-homed mounted home dir
   - device_file: /dev/loop0
-  - ignore: true
+    ignore: true
