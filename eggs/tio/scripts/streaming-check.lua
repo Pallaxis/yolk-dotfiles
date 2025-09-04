@@ -1,3 +1,4 @@
+-- Script expects that it is running before device has been booted
 function shell_ready()
 	tio.expect("~]# ")
 end
