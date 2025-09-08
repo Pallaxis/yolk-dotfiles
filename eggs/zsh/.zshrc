@@ -57,8 +57,8 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
-zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
-zinit light sindresorhus/pure
+# zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
+# zinit light sindresorhus/pure
 
 # Add in snippets
 zinit snippet OMZP::git
@@ -83,12 +83,12 @@ zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}' # Environment variables
 
 # Prompt styling
-zstyle :prompt:pure:git:stash show yes
-zstyle ':prompt:pure:prompt:success' color '#cba6f7'
-zstyle ':prompt:pure:prompt:error' color '#f38ba8'
-zstyle ':prompt:pure:prompt:continuation' color '#cba6f7'
-zstyle ':prompt:pure:git:branch' color '#b4befe'
-zstyle ':prompt:pure:git:dirty' color '#f2cdcd'
+# zstyle :prompt:pure:git:stash show yes
+# zstyle ':prompt:pure:prompt:success' color '#cba6f7'
+# zstyle ':prompt:pure:prompt:error' color '#f38ba8'
+# zstyle ':prompt:pure:prompt:continuation' color '#cba6f7'
+# zstyle ':prompt:pure:git:branch' color '#b4befe'
+# zstyle ':prompt:pure:git:dirty' color '#f2cdcd'
 
 # Keybindings
 WORDCHARS=${WORDCHARS/\/}							# Allows deleting up to / as a word
@@ -156,8 +156,36 @@ autoload -Uz compinit && compinit
 zinit cdreplay -q
 
 # Loading prompt
-autoload -U promptinit; promptinit
-prompt pure
+# autoload -U promptinit; promptinit
+# prompt pure
+
+autoload -Uz vcs_info
+precmd_vcs_info() {
+  if command git rev-parse --is-inside-work-tree &>/dev/null; then
+    vcs_info
+  else
+    vcs_info_msg_0_=''
+  fi
+}
+
+precmd_show_status() {
+    local exit_code=$?
+    if [[ $exit_code -eq 1 ]]; then
+	LAST_EXIT="%F{red}$exit_code%f "
+    elif [[ $exit_code -ne 0 ]]; then
+	LAST_EXIT="%F{yellow}$exit_code%f "
+    else
+	LAST_EXIT=""
+    fi
+}
+
+precmd_functions+=(precmd_vcs_info precmd_show_status)
+setopt prompt_subst
+PROMPT=$'\n''%F{#89b4fa}%~%f ${LAST_EXIT}'$'\n''%F{#cba6f7}%f '
+RPROMPT="${vcs_info_msg_0_}"
+
+zstyle ':vcs_info:git:*' formats '%F{240}%b %f %F{237}%r%f'
+zstyle ':vcs_info:*' enable git
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"

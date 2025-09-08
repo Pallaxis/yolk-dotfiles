@@ -17,7 +17,6 @@ export let eggs = #{
     qt6ct: "~/.config/qt6ct/",
     qutebrowser: #{ targets: "~/.config/qutebrowser/", strategy: "merge" },
     rofi: "~/.config/rofi/",
-    share: #{ enabled: false },
     systemd: #{ targets: "~/.config/systemd/user/", strategy: "merge" },
     tio: "~/.config/tio/",
     tmux: "~/.config/tmux/",
@@ -27,5 +26,5 @@ export let eggs = #{
     wallpapers: "~/.local/share/wallpapers/",
     waybar: "~/.config/waybar/",
     wlogout: "~/.config/wlogout/",
-    zsh: #{ targets: #{ ".zshrc": "~/.zshrc" }, templates: [ ".zshrc" ] },
+    zsh: #{ targets: #{ ".zshrc": "~/.zshrc" }, },
 };
