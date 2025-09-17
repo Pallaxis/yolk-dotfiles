@@ -70,7 +70,9 @@ zinit snippet OMZP::command-not-found
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' menu no
+# Disable prompt and use menu selection
+zstyle ':completion:*' list-prompt ''
+zstyle ':completion:*' menu select=long
 # fzf-tab
 zstyle ':fzf-tab:*' fzf-preview '[[ -d $realpath ]] && eza -1 --icons=auto $realpath || bat --paging=never --style=plain --color=always $realpath' # Shows ls or bat based on context
 zstyle ':fzf-tab:*' default-color "" # Color when there is no group
@@ -159,6 +161,7 @@ zinit cdreplay -q
 # autoload -U promptinit; promptinit
 # prompt pure
 
+# Configuring my prompt
 autoload -Uz vcs_info
 precmd_vcs_info() {
   if command git rev-parse --is-inside-work-tree &>/dev/null; then
@@ -167,7 +170,6 @@ precmd_vcs_info() {
     vcs_info_msg_0_=''
   fi
 }
-
 precmd_show_status() {
     local exit_code=$?
     if [[ $exit_code -eq 1 ]]; then
@@ -178,12 +180,10 @@ precmd_show_status() {
 	LAST_EXIT=""
     fi
 }
-
 precmd_functions+=(precmd_vcs_info precmd_show_status)
 setopt prompt_subst
 PROMPT=$'\n''%F{#89b4fa}%~%f ${LAST_EXIT}'$'\n''%F{#cba6f7}%f '
 RPROMPT="${vcs_info_msg_0_}"
-
 zstyle ':vcs_info:git:*' formats '%F{240}%b %f %F{237}%r%f'
 zstyle ':vcs_info:*' enable git
 
@@ -192,6 +192,8 @@ export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
 
+# Uses bat as manpager (replaces bat-extras package)
+export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
+
 # Shell integrations
-eval "$(batman --export-env)"
 eval "$(fzf --zsh)"

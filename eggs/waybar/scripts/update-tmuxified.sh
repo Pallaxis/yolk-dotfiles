@@ -1,23 +1,33 @@
 #!/usr/bin/env bash
 
-UPDATE_SESSION="Update"
+session_name="Update"
+alacritty_workspace=$(hyprctl clients | awk '/Window .* Alacritty/{for(i=0;i<5;i++) getline; print $2; exit}')
 
-# Create a new session (in background)
-#tmux new-session -n "$UPDATE_SESSION" -s "$UPDATE_SESSION" ~/.local/bin/update.sh
+# First ensure we're on our terminal workspace
+hyprctl dispatch workspace 2
+
+# Create update session
+# tmux new-session -Ad -s "$session_name"
+tmux new-session -d -s "$session_name"
 
 # If theres no session named Update, create it and send the command as a key so it doesn't exit on complete
-if ! tmux has-session -t "$UPDATE_SESSION"; then
-    tmux new-session -n "$UPDATE_SESSION" -s "$UPDATE_SESSION" -d
-    tmux send-keys -t "$UPDATE_SESSION" "~/.local/bin/update.sh" Enter
+# if ! tmux has-session -t "$session_name"; then
+#     tmux new-session -n "$session_name" -s "$session_name" -d
+#     tmux send-keys -t "$session_name" "$HOME/.local/bin/update.sh" Enter
+# fi
+
+# Check if our client is attached
+attached_client=$(tmux list-clients -F "#{client_tty}" 2>/dev/null | head -n 1)
+if [[ -n "$attached_client" ]]; then
+    tmux switch-client -t "$session_name"
+else
+    tmux attach-session -t "$session_name"
 fi
 
-# Find the first attached client (if any)
-ATTACHED_CLIENT=$(tmux list-clients -F "#{client_tty}" 2>/dev/null | head -n 1)
+pacman_running=$(pidof pacman)
+yay_running=$(pidof yay)
 
-if [[ -n "$ATTACHED_CLIENT" ]]; then
-    notify-send --urgency=normal "Switching attached client ($ATTACHED_CLIENT) to session $UPDATE_SESSION"
-    tmux switch-client -t "$UPDATE_SESSION"
-else
-    notify-send --urgency=normal "No attached clients. Attaching to $UPDATE_SESSION"
-    tmux attach-session -t "$UPDATE_SESSION"
+if [[ -z $pacman_running && -z $yay_running ]]; then
+    # tmux send-keys -t "$session_name" "$HOME/.local/bin/update.sh" Enter
+    tmux new-window -t $session_name:1 -k -n "Update" "$HOME/.local/bin/update.sh"
 fi

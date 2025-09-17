@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
+# Simple script to update Arch/AUR packages, asks for flatpak updates at the end
 
 main() {
 	fastfetch
-	#sudo pacman -Syu --noconfirm
 	yay --answerdiff=All --answerclean=None --noconfirm
 	echo
 	read -p "Update Flatpak packages? [Y/n]"$'\n> ' yn
@@ -18,8 +18,9 @@ main() {
 			printf "\nUpdating Flatpaks...\n\n"
 			flatpak update -y;;
 	esac
-
 	echo
 	read -p "Press enter to exit" 
+	exit
 }
+
 main

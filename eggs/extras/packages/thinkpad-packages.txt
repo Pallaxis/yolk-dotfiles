@@ -37,7 +37,6 @@ fortune-mod
 fzf
 gimp
 git
-gnome-keyring
 grimblast-git
 gst-libav
 gst-plugin-pipewire
@@ -72,7 +71,6 @@ lshw
 lsof
 man-db
 mesa-utils
-neo-matrix
 neovim
 net-tools
 networkmanager

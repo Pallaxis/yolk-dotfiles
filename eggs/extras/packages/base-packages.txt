@@ -82,6 +82,7 @@ qt5ct
 qt6ct
 rclone
 reflector
+ripgrep
 rofi-wayland
 rsync
 samba
