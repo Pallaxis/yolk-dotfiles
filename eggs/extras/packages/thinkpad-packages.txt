@@ -7,7 +7,6 @@ audacity
 base
 base-devel
 bat
-bat-extras
 bibata-cursor-theme
 bind
 bluez
