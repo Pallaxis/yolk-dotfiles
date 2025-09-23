@@ -2,21 +2,41 @@
 # Work in progress script to sync important parts of my arch machines
 
 sync_packages() {
-    # Takes the hostname as an argument then ensures all the needed
-    # packages are installed.
+    # Takes hostname's packages and installs along with a list of base packages
+    # TODO: Really messy with newline seperated/space space seperated arrays.
+    # change to just convert one way when I need to, probably just before using it in yay
+    # as that would make all other operations easier
+    local hostname
+    hostname=$(hostnamectl hostname)
     local packages_dir=$HOME/.config/yolk/eggs/extras/packages
-    local argument=$1
-    local path_to_packages="$packages_dir/$argument-packages.txt"
+    local hostname_packages_file="$packages_dir/$hostname-packages.txt"
+    local base_packages_file="$packages_dir/base-packages.txt"
+
+    # Reads in as space seperated values
+    if [[ -f "$hostname_packages_file" && -f "$base_packages_file" ]]; then
+        mapfile -t spaces_hostname_packages < "$hostname_packages_file"
+        mapfile -t spaces_base_packages < "$base_packages_file"
+        mapfile -t spaces_installed_packages < <(pacman -Qeq)
+    else
+        echo "Missing 1 or more packages.txt file!"
+        exit
+    fi
+    # Convert to newline seperated values
+    newline_base_packages=$(echo "${spaces_base_packages[@]}" | tr ' ' '\n')
+    newline_hostname_packages=$(echo "${spaces_hostname_packages[@]}" | tr ' ' '\n')
+    newline_installed_packages=$(echo "${spaces_installed_packages[@]}" | tr ' ' '\n')
+    # Combine and sort the final list
+    newline_combined_packages=$(printf "%s\n" "${newline_base_packages[@]}" "${newline_hostname_packages[@]}" | sort)
+    spaces_combined_packages+=("${spaces_hostname_packages[@]}" "${spaces_base_packages[@]}")
 
     echo "Starting by updating system..."
     yay -Syu
 
-    if [[ -f $path_to_packages ]]; then
-        echo "Ensuring $argument packages are installed..."
-        xargs -a "$path_to_packages" yay -S --needed
-    else
-        echo "No package file found for: $argument"
-    fi
+    echo "Ensuring $hostname's packages & base packages are installed..."
+    yay -S --needed "${spaces_combined_packages[@]}"
+
+    printf "\nExplicitly installed packages not in either list:\n"
+    comm -23 <(printf "%s\n" "${newline_installed_packages[@]}" | sort) <(printf "%s\n" "${newline_combined_packages[@]}" | sort)
 }
 
 sync_configs() {
@@ -87,7 +107,6 @@ sync_services(){
 
 hostname=$(hostnamectl hostname)
 
-sync_packages base
-sync_packages $hostname
+sync_packages
 # sync_configs
-#sync_services
+# sync_services
