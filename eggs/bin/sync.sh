@@ -30,7 +30,7 @@ sync_packages() {
     spaces_combined_packages+=("${spaces_hostname_packages[@]}" "${spaces_base_packages[@]}")
 
     echo "Starting by updating system..."
-    yay -Syu
+    yay -Syu --answerdiff All
 
     echo "Ensuring $hostname's packages & base packages are installed..."
     yay -S --needed "${spaces_combined_packages[@]}"
