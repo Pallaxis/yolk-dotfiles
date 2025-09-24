@@ -1,4 +1,3 @@
--- LSP Plugins
 return {
   {
     -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
@@ -86,7 +85,11 @@ return {
           ---@param bufnr? integer some lsp support methods only in specific files
           ---@return boolean
           local function client_supports_method(client, method, bufnr)
-            return client:supports_method(method, bufnr)
+            if vim.fn.has 'nvim-0.11' == 1 then
+              return client:supports_method(method, bufnr)
+            else
+              return client.supports_method(method, { bufnr = bufnr })
+            end
           end
 
           -- The following two autocommands are used to highlight references of the
@@ -220,9 +223,10 @@ return {
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-        "pylint", -- Python linter
-        "markdownlint", -- Markdown linter
-        "pyright", -- Python static type checker
+        -- "pylint", -- Python linter
+        "pylsp", -- Python LSP server
+        -- "markdownlint", -- Markdown linter
+        -- "pyright", -- Python static type checker
         "yaml-language-server", -- yaml
         "hyprls", -- Hyprlang
         "qmlls", -- qml
