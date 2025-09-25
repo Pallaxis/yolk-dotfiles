@@ -2,7 +2,7 @@
     "style": {
         "font": "JetbrainsMono Nerd"
     },
-    "layer": "top",
+    "layer": "middle",
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock#date", "idle_inhibitor", "clock#time"],
     "modules-right": ["custom/kernel-check", "tray", "custom/update", "network", "custom/cpu-usage", "custom/cpu-temp", "pulseaudio", "battery", "custom/notifications"],
