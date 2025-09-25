@@ -50,13 +50,15 @@ sync_configs() {
     echo "$username ALL=(ALL) NOPASSWD: /usr/bin/pacman -Syu --noconfirm" | sudo tee /etc/sudoers.d/01_"$username"
     echo "$username ALL=(ALL) NOPASSWD: /usr/bin/checkupdates -d" | sudo tee /etc/sudoers.d/01_checkupdates
 
+    # Keyd, fix to recognise the virtual keyboard as a real keyboard
+    # this fixes the auto touchpad disable
     cat << EOF | sudo tee /etc/libinput/local-overrides.quirks
 [Serial Keyboards]
 MatchUdevType=keyboard
 MatchName=keyd virtual keyboard
 AttrKeyboardIntegration=internal
 EOF
-
+    # Keyd config
     cat << EOF | sudo tee /etc/keyd/default.conf
 [ids]
 * = *
@@ -69,17 +71,29 @@ esc = capslock
 # PrtSc on thinkpad mapped to meta
 sysrq = layer(meta)
 EOF
+
+# Reflector conf
+sudo sed -i -e '/^--country/c\
+--country New Zealand,Australia,Singapore,Japan' \
+    -e '/^--sort/c\
+--sort rate' /etc/xdg/reflector/reflector.conf
 }
 
 sync_services(){
     # Ensures all services are enabled and running
-    service_list=$HOME/.config/yolk/eggs/extras/systemd-services
-    if [[ ! -f "$service_list" || ! -s "$service_list" ]]; then
-        echo "Service list file does not exist or is empty."
-        return 1
+    # TODO: setup a root services file too, this is just user units
+    user_service_list=$HOME/.config/yolk/eggs/extras/systemd-services
+    root_service_list=$HOME/.config/yolk/eggs/extras/systemd-root-services
+    if [[ ! -f "$user_service_list" || ! -s "$user_service_list" ]]; then
+        echo "User service list file does not exist or is empty."
+        exit 1
+    fi
+    if [[ ! -f "$root_service_list" || ! -s "$root_service_list" ]]; then
+        echo "Root service list file does not exist or is empty."
+        exit 1
     fi
 
-    # Check each service individually
+    # Check each user service individually
     while IFS= read -r service; do
         local enabled=true
         local active=true
@@ -90,23 +104,44 @@ sync_services(){
                 echo -e "\033[33mEnabling service: $service\033[0m"
                 systemctl --user enable "$service"
             fi
-
             # Start if not already running
             if ! systemctl --user is-active "$service" | grep -qx 'active'; then
                 active=false
                 echo -e "\033[33mStarting service: $service\033[0m"
                 systemctl --user start "$service"
             fi
-
             if $enabled && $active; then
                 echo "$service is already enabled & running"
             fi
         fi
-    done < "$service_list"
+    done < "$user_service_list"
+
+    # Check each root service individually
+    while IFS= read -r service; do
+        local enabled=true
+        local active=true
+        if [[ -n "$service" ]]; then
+            # Enable if not already enabled
+            if ! systemctl is-enabled "$service" | grep -qx 'enabled'; then
+                enabled=false
+                echo -e "\033[33mEnabling service: $service\033[0m"
+                sudo systemctl --user enable "$service"
+            fi
+            # Start if not already running
+            if ! systemctl is-active "$service" | grep -qx 'active'; then
+                active=false
+                echo -e "\033[33mStarting service: $service\033[0m"
+                sudo systemctl start "$service"
+            fi
+            if $enabled && $active; then
+                echo "$service is already enabled & running"
+            fi
+        fi
+    done < "$root_service_list"
 }
 
 hostname=$(hostnamectl hostname)
 
-sync_packages
+# sync_packages
 # sync_configs
-# sync_services
+sync_services

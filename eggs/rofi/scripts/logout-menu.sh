@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-
-# Toggle state, assuming only one rofi can run at a time
-if pidof rofi > /dev/null; then
-    pkill rofi
-    exit
-fi
+# Simple rofi menu that shows a list of options and handles them by on a case basis
 
 config="$HOME/.config/rofi/logout-menu.rasi"
 options=$(
@@ -14,8 +9,9 @@ options=$(
     echo " Reboot"
     echo "󰗽 Logout"
 )
-selection=$(echo -e "$options" | rofi -dmenu -no-custom -i -p "Logout Menu" -config "${config}")
 
+# Kill rofi if it's running or show rofi with our options otherwise
+selection=$(pkill rofi || echo -e "$options" | rofi -dmenu -no-custom -i -p "Logout Menu" -config "${config}")
 if [[ -z $selection ]]; then
     exit
 fi
