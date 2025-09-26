@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
 
+script_dir="$HOME/.config/tmux/sessions"
 # Get the list of tmuxp sessions
-sessions=$(tmuxp ls 2>/dev/null)
+sessions=$(find "$script_dir" -mindepth 1 -type f -executable -printf "%f\n")
 
 # Use rofi to prompt the user
-chosen=$(echo "$sessions" | rofi -dmenu -i -p "Tmuxp session or new name:")
+chosen=$(echo "$sessions" | rofi -dmenu -i -p "Select session or create new:")
 
 # Exit if no selection
 [ -z "$chosen" ] && exit
 
-# If the chosen input matches an existing tmuxp session
 if echo "$sessions" | grep -qx "$chosen"; then
-    # Load the tmuxp session
-    tmuxp load "$chosen" --yes > /dev/null 2>&1
+    # Runs tmux session setup
+    "$script_dir"/"$chosen"
 else
     # Create a new tmux session with that name
     tmux new-session -Ad -c ~ -s "$chosen"

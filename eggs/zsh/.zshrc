@@ -6,12 +6,11 @@ if [[ -z $TMUX ]]; then
 fi
 
 # Make general or attach to it if it's already running
-if [[ -z $(pidof tmux) ]]; then
+if [[ -z $(tmux list-sessions) ]]; then
     tmux new-session -s general
 elif [[ -z $(tmux list-clients) ]]; then
     tmux new-session -A -s general
 fi
-# NOTE: For some reason this makes tmux-sessionizer fzf lose it's colours. Running fzf manually doensn't though
 
 # Sending commands on terminal launch
 fastfetch											# Shows a sick ass fetch
