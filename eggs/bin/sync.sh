@@ -74,7 +74,7 @@ EOF
 
 # Reflector conf
 sudo sed -i -e '/^--country/c\
---country New Zealand,Australia,Singapore,Japan' \
+--country New\\ Zealand,Australia,Singapore,Japan' \
     -e '/^--sort/c\
 --sort rate' /etc/xdg/reflector/reflector.conf
 }
@@ -143,5 +143,5 @@ sync_services(){
 hostname=$(hostnamectl hostname)
 
 # sync_packages
-# sync_configs
+sync_configs
 sync_services
