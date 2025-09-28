@@ -151,6 +151,7 @@ alias tree='eza --tree --icons=auto'								# Same as tree but with colours
 alias cat='bat --paging=never --style=plain'					# Cat but with colors
 alias diff='diff --color'							# Enables color for diffs
 alias info='info --vi-keys'
+alias fd-aged='fd -0 -t d | xargs -0 stat --format "%Y %n" | sort -n'
 
 # Load completions (Must be done after fzf-tab)
 autoload -Uz compinit && compinit

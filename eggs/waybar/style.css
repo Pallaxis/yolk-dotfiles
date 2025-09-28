@@ -1,6 +1,6 @@
 /* General font and text color */
 * {
-  font-family: "JetbrainsMono Nerd", monospace;
+  font-family: "JetbrainsMono Nerd Font", monospace;
   font-size: 12px;
   color: white;
   text-shadow: 0 0 1.5px rgba(0, 0, 0, 1);
