@@ -73,10 +73,26 @@ sysrq = layer(meta)
 EOF
 
 # Reflector conf
-sudo sed -i -e '/^--country/c\
+sudo sed -i \
+    -e '/^--country/c\
 --country New\\ Zealand,Australia,Singapore,Japan' \
     -e '/^--sort/c\
 --sort rate' /etc/xdg/reflector/reflector.conf
+
+# SSHD config hardening
+    cat << EOF | sudo tee /etc/ssh/sshd_config.d/20-force_public_key_auth.conf
+PasswordAuthentication no
+AuthenticationMethods publickey
+EOF
+    cat << EOF | sudo tee /etc/ssh/sshd_config.d/20-disallow_root_login.conf
+PermitRootLogin no
+EOF
+
+sudo systemctl try-restart sshd.service
+
+# UFW
+echo "Run this command to setup simple firewall rules:"
+echo "sudo ufw limit ssh && sudo ufw enable"
 }
 
 sync_services(){

@@ -121,8 +121,8 @@ alias l='eza -lh --icons=auto'							# Long list
 alias ls='eza -1 --icons=auto'							# Short list
 alias ll='eza -lhag --icons=auto --sort=name --group-directories-first'		# Long list all
 alias ld='eza -lhD --icons=auto'						# Long list dirs
-alias lc='eza --icons=auto --sort=created --reverse --long --created --header --no-permissions --no-filesize --no-user'		# Sorts most recently created at the top
-alias lm='eza --icons=auto --sort=modified --reverse --long --modified --header --no-permissions --no-filesize --no-user'		# Sorts most recently modified at the top
+alias lc='eza --icons=auto --sort=created --long --created --header --no-permissions --no-filesize --no-user'		# Sorts most recently created at the top
+alias lm='eza --icons=auto --sort=modified --long --modified --header --no-permissions --no-filesize --no-user'		# Sorts most recently modified at the top
 
 #pacman -Qeq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
 #pacman -Qdtq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rns {})'

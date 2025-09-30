@@ -44,10 +44,7 @@ window#waybar {
   margin-left: 0px;
   margin-right: 0px;
 }
-#idle_inhibitor.activated {
-  color: red;
-}
-#custom-notifications {
+#custom-notifications, #idle_inhibitor.activated, #systemd-failed-units.degraded {
   color: red;
 }
 
