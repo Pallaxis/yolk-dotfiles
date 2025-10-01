@@ -9,8 +9,8 @@ sync_packages() {
     local hostname
     hostname=$(hostnamectl hostname)
     local packages_dir=$HOME/.config/yolk/eggs/extras/packages
-    local hostname_packages_file="$packages_dir/$hostname-packages.txt"
     local base_packages_file="$packages_dir/base-packages.txt"
+    local hostname_packages_file="$packages_dir/$hostname-packages.txt"
 
     # Reads in as space seperated values
     if [[ -f "$hostname_packages_file" && -f "$base_packages_file" ]]; then
@@ -156,8 +156,55 @@ sync_services(){
     done < "$root_service_list"
 }
 
-hostname=$(hostnamectl hostname)
+diff_packages() {
+    # Pulls all explicitly installed packages and checks if they're in our packages.txt list
+    local hostname
+    hostname=$(hostnamectl hostname)
+    local packages_dir=$HOME/.config/yolk/eggs/extras/packages
+    local base_packages_file="$packages_dir/base-packages.txt"
+    local hostname_packages_file="$packages_dir/$hostname-packages.txt"
 
-# sync_packages
-sync_configs
-sync_services
+    tmp_package_list=$(mktemp)
+    pacman -Qeq > "$tmp_package_list"
+    declare -a in_hostname
+    declare -a in_base
+    declare -a in_neither
+
+    declare -a packages
+    while IFS= read -r package; do
+        packages+=("$package")
+    done < "$tmp_package_list"
+
+    # sort by overlapping packages based on our package files
+    for package in "${packages[@]}"; do
+        if grep -qF "$package" "$hostname_packages_file"; then
+            # echo "$package in host file"
+            in_hostname+=("$package")
+        elif grep -qF "$package" "$base_packages_file"; then
+            # echo "$package in base file"
+            in_base+=("$package")
+        else
+            # echo "$package missing"
+            in_neither+=("$package")
+        fi
+    done
+
+    # echo "Installed packages not in $hostname-packages.txt file:"
+    # echo "${in_hostname[@]}"
+    # echo
+    #
+    # echo "Installed packages not in host-packages.txt file:"
+    # echo "${in_base[@]}"
+    # echo
+
+    echo "Installed packages not in either packages.txt file:"
+    echo "${in_neither[@]}"
+    echo
+
+    echo "Check if you want to add any of these packages to a packages.txt file in $packages_dir"
+}
+
+sync_packages
+diff_packages
+# sync_configs
+# sync_services

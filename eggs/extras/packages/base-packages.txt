@@ -39,13 +39,13 @@ gst-plugins-good
 gtk-engine-murrine
 hex
 hypridle
-hyprland-git
-hyprlang-git
+hyprland
+hyprlang
 hyprlock
 hyprpaper
 hyprpolkitagent
-hyprutils-git
-hyprwayland-scanner-git
+hyprutils
+hyprwayland-scanner
 imagemagick
 inotify-tools
 intel-ucode
@@ -79,6 +79,7 @@ pipewire-alsa
 pipewire-jack
 pipewire-pulse
 pkgfile
+pkgstats
 python-pip
 python-pylint
 python-pytest
@@ -86,6 +87,7 @@ qbittorrent
 qt5-wayland
 qt5ct
 qt6ct
+qutebrowser
 rclone
 reflector
 ripgrep
@@ -95,9 +97,9 @@ samba
 socat
 sshfs
 sudo
-tailscale
 tcpdump
 tealdeer
+tesseract
 thunar
 thunderbird
 tio
@@ -114,6 +116,7 @@ v4l2loopback-dkms
 vlc
 waybar
 waybar-module-pacman-updates-git
+wev
 wget
 wl-clipboard
 wlogout

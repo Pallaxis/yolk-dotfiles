@@ -1,5 +1,8 @@
+ansible
+ansible-core
 asciiquarium
 audacity
+ddcutil
 krita
 lolcat
 lshw
