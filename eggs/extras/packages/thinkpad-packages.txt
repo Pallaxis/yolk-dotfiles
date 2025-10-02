@@ -3,6 +3,11 @@ ansible-core
 asciiquarium
 audacity
 ddcutil
+dpkg
 krita
 lolcat
 lshw
+python-pip
+python-pylint
+python-pytest
+tio

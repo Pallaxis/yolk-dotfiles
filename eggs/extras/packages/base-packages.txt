@@ -1,6 +1,5 @@
 7zip
 alacritty
-arch-audit
 base
 base-devel
 bat
@@ -14,12 +13,10 @@ calc
 caligula
 chaotic-keyring
 chaotic-mirrorlist
-chromium
 cowsay
 cups
 darkly-bin
 deja-dup
-dpkg
 dunst
 exfat-utils
 expac
@@ -37,7 +34,6 @@ gst-libav
 gst-plugin-pipewire
 gst-plugins-good
 gtk-engine-murrine
-hex
 hypridle
 hyprland
 hyprlang
@@ -48,7 +44,6 @@ hyprutils
 hyprwayland-scanner
 imagemagick
 inotify-tools
-intel-ucode
 keepassxc
 keyd
 ldns
@@ -67,7 +62,6 @@ networkmanager
 nm-connection-editor
 nmap
 npm
-nss-mdns
 ntfs-3g
 obs-studio
 openssh
@@ -80,9 +74,6 @@ pipewire-jack
 pipewire-pulse
 pkgfile
 pkgstats
-python-pip
-python-pylint
-python-pytest
 qbittorrent
 qt5-wayland
 qt5ct
@@ -91,7 +82,7 @@ qutebrowser
 rclone
 reflector
 ripgrep
-rofi-wayland
+rofi
 rsync
 samba
 socat
@@ -100,11 +91,8 @@ sudo
 tcpdump
 tealdeer
 tesseract
-thunar
 thunderbird
-tio
 tmux
-tmuxp
 traceroute
 ttf-jetbrains-mono-nerd
 ttf-nerd-fonts-symbols-common
@@ -113,7 +101,6 @@ ufw
 usbutils
 uwsm
 v4l2loopback-dkms
-vlc
 waybar
 waybar-module-pacman-updates-git
 wev
@@ -124,6 +111,5 @@ xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 xorg-xeyes
 yay
-yazi
 yolk
 zsh
