@@ -46,7 +46,7 @@ export FZF_DEFAULT_OPTS='--preview-window=up:70% --color="query:#89b4fa,hl:#f7b3
 #export MANGOHUD=1
 #export MANGOHUD_DLSYM=1 # not sure if this was meant to be commented
 
-{% if data.is_nvidia %}
+#{% if data.is_nvidia %}
 #<yolk> # █▄░█ █░█ █ █▀▄ █ ▄▀█
 #<yolk> # █░▀█ ▀▄▀ █ █▄▀ █ █▀█
 
@@ -62,4 +62,4 @@ export FZF_DEFAULT_OPTS='--preview-window=up:70% --color="query:#89b4fa,hl:#f7b3
 #<yolk> export GBM_BACKEND=nvidia-drm
 #<yolk> export __GLX_VENDOR_LIBRARY_NAME=nvidia # this might cause my discord streams to not work
 #<yolk> export WLR_NO_HARDWARE_CURSORS=1
-{% end %}
+#{% end %}

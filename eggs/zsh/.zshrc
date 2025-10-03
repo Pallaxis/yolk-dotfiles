@@ -1,9 +1,12 @@
 # Autostarting stuff
-if [[ -z $TMUX ]]; then
-    if uwsm check may-start; then
-	exec uwsm start hyprland.desktop
-    fi
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+    exec Hyprland
 fi
+# if [[ -z $TMUX ]]; then
+#     if uwsm check may-start; then
+# 	exec uwsm start hyprland.desktop
+#     fi
+# fi
 
 # Make general or attach to it if it's already running
 if [[ -z $(tmux list-sessions) ]]; then
