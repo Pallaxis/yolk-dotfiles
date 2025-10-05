@@ -18,6 +18,7 @@ export let eggs = #{
     qutebrowser: #{ targets: "~/.config/qutebrowser/", strategy: "merge" },
     rofi: "~/.config/rofi/",
     systemd: #{ targets: "~/.config/systemd/user/", strategy: "merge" },
+    tealdeer: "~/.config/tealdeer/",
     tio: "~/.config/tio/",
     tmux: "~/.config/tmux/",
     udiskie: "~/.config/udiskie/",
