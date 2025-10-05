@@ -4,6 +4,7 @@ export let data = #{
 
 export let eggs = #{
     alacritty: "~/.config/alacritty/",
+    applications: #{ targets: "~/.local/share/applications/", strategy: "merge" },
     bat: "~/.config/bat/",
     bin: #{ targets: "~/.local/bin/", strategy: "merge" },
     btop: "~/.config/btop/",

@@ -67,9 +67,9 @@ zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
 
-# FZF settings
+# System FZF settings
 export FZF_CTRL_T_COMMAND="fd --hidden --strip-cwd-prefix --exclude git"
-export FZF_DEFAULT_OPTS="--preview-window=up:70% --color=query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7"
+export FZF_DEFAULT_OPTS="--preview-window=up:70% --bind=ctrl-d:page-down,ctrl-u:page-up --color=query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7"
 
 # Completion
 zstyle ':completion:*:git-checkout:*' sort false
@@ -78,10 +78,11 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # Disable prompt and use menu selection
 zstyle ':completion:*' list-prompt ''
 zstyle ':completion:*' menu select=long
-# fzf-tab
+# fzf-tab settings
 zstyle ':fzf-tab:*' fzf-preview '[[ -d $realpath ]] && eza -1 --icons=auto $realpath || bat --paging=never --style=plain --color=always $realpath' # Shows ls or bat based on context
 zstyle ':fzf-tab:*' default-color "" # Color when there is no group
 zstyle ':fzf-tab:*' fzf-flags --color="query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7" # Catppuccin colors
+zstyle ':fzf-tab:*' fzf-bindings 'ctrl-d:page-down' 'ctrl-u:page-up'
 zstyle ':fzf-tab:*' fzf-min-height 20 # Opens in tmux popup window
 # zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup # Opens in tmux popup window
 # zstyle ':fzf-tab:*' popup-smart-tab no # Opens in tmux popup window
