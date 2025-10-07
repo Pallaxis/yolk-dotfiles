@@ -159,6 +159,12 @@ alias cat='bat --paging=never --style=plain'					# Cat but with colors
 alias diff='diff --color'							# Enables color for diffs
 alias info='info --vi-keys'
 alias fd-aged='fd -0 -t d | xargs -0 stat --format "%Y %n" | sort -n'
+# Yolk aliases
+alias ygst='yolk git status'
+alias yga='yolk git add'
+alias ygc='yolk git commit --verbose'
+alias ygca='yolk git commit --all --verbose'
+alias ygf='yolk git fetch'
 
 # Load completions (Must be done after fzf-tab)
 autoload -Uz compinit && compinit
