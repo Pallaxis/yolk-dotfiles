@@ -5,7 +5,7 @@
     "layer": "middle",
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock#date", "idle_inhibitor", "clock#time"],
-    "modules-right": ["custom/kernel-check", "systemd-failed-units", "tray", "custom/update", "network", "custom/cpu-usage", "custom/cpu-temp", "pulseaudio", "battery", "custom/notifications"],
+    "modules-right": ["custom/kernel-check", "systemd-failed-units", "tray", "custom/update", "network", "custom/ram-usage", "custom/cpu-usage", "custom/cpu-temp", "pulseaudio", "battery", "custom/notifications"],
 
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -89,6 +89,14 @@
         "format-disabled": " ",
         "tooltip-format-disabled": "Network Disabled",
         "tooltip-format": "{ipaddr}\nUp: {bandwidthUpBits}\nDown:{bandwidthDownBits}",
+    },
+    "custom/ram-usage": {
+        "exec": "~/.config/waybar/scripts/ram-usage.sh",
+        "return-type": "json",
+        "tooltip": true,
+        "interval": 5,
+        "min-length": 6,
+        "max-length": 6
     },
     "custom/cpu-usage": {
         "exec": "~/.config/waybar/scripts/cpu-usage.sh",
