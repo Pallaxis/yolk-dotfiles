@@ -165,6 +165,8 @@ alias yga='yolk git add'
 alias ygc='yolk git commit --verbose'
 alias ygca='yolk git commit --all --verbose'
 alias ygf='yolk git fetch'
+alias ygl='yolk git log --decorate --graph --all'
+alias yglo='yolk git log --oneline --decorate --graph --all'
 
 # Load completions (Must be done after fzf-tab)
 autoload -Uz compinit && compinit
