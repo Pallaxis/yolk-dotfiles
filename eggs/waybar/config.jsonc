@@ -1,6 +1,6 @@
 {
     "style": {
-        "font": "JetbrainsMono Nerd"
+        "font": "JetbrainsMono Nerd Font Mono"
     },
     "layer": "middle",
     "modules-left": ["hyprland/workspaces"],

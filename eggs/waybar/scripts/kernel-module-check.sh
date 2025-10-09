@@ -25,7 +25,7 @@ if [[ "$current_kernel" == "$latest_kernel" ]]; then
   exit 0
 else
   # Not up-to-date: show warning
-  echo "{\"text\": \"⚠️ Kernel: $current_kernel\", \"tooltip\": \"Latest available: $latest_kernel\", \"class\": \"warning\"}"
+  echo "{\"text\": \" Kernel: $current_kernel\", \"tooltip\": \"Latest available: $latest_kernel\", \"class\": \"warning\"}"
   exit 0
 fi
 
