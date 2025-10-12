@@ -202,11 +202,6 @@ RPROMPT="${vcs_info_msg_0_}"
 zstyle ':vcs_info:git:*' formats '%F{240}%b %f %F{237}%r%f'
 zstyle ':vcs_info:*' enable git
 
-# Pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
-
 # Uses bat as manpager (replaces bat-extras package)
 export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
 
