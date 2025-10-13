@@ -13,6 +13,7 @@ c.content.cookies.accept = 'all'
 #     "https://raw.githubusercontent.com/Spam404/lists/master/adblock-list.txt",
 #     "https://easylist-downloads.adblockplus.org/global-filters%2Beasylist.txt",
 # ]
+c.content.blocking.method = "both"
 c.content.blocking.adblock.lists = [ \
         "https://easylist.to/easylist/easylist.txt",
         "https://easylist.to/easylist/easyprivacy.txt",
