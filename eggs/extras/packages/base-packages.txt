@@ -75,6 +75,7 @@ pipewire-jack
 pipewire-pulse
 pkgfile
 pkgstats
+python-adblock
 qbittorrent
 qt5-wayland
 qt5ct
@@ -100,13 +101,11 @@ ttf-nerd-fonts-symbols-common
 udiskie
 ufw
 usbutils
-v4l2loopback-dkms
 waybar
 waybar-module-pacman-updates-git
 wev
 wget
 wl-clipboard
-wlogout
 xdg-desktop-portal-gtk
 xdg-desktop-portal-hyprland
 xorg-xeyes

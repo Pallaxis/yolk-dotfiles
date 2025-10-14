@@ -35,8 +35,9 @@ sync_packages() {
     echo "Ensuring $hostname's packages & base packages are installed..."
     yay -S --needed "${spaces_combined_packages[@]}"
 
-    printf "\nExplicitly installed packages not in either list:\n"
-    comm -23 <(printf "%s\n" "${newline_installed_packages[@]}" | sort) <(printf "%s\n" "${newline_combined_packages[@]}" | sort)
+    # Unneeded as I have a function for diffing now
+    # printf "\nExplicitly installed packages not in either list:\n"
+    # comm -23 <(printf "%s\n" "${newline_installed_packages[@]}" | sort) <(printf "%s\n" "${newline_combined_packages[@]}" | sort)
 }
 
 sync_configs() {
@@ -158,6 +159,7 @@ sync_services(){
 
 diff_packages() {
     # Pulls all explicitly installed packages and checks if they're in our packages.txt list
+    echo "Running diff on package list..."
     local hostname
     hostname=$(hostnamectl hostname)
     local packages_dir=$HOME/.config/yolk/eggs/extras/packages
@@ -177,10 +179,10 @@ diff_packages() {
 
     # sort by overlapping packages based on our package files
     for package in "${packages[@]}"; do
-        if grep -qF "$package" "$hostname_packages_file"; then
+        if grep -qxF "$package" "$hostname_packages_file"; then
             # echo "$package in host file"
             in_hostname+=("$package")
-        elif grep -qF "$package" "$base_packages_file"; then
+        elif grep -qxF "$package" "$base_packages_file"; then
             # echo "$package in base file"
             in_base+=("$package")
         else
@@ -189,22 +191,20 @@ diff_packages() {
         fi
     done
 
-    # echo "Installed packages not in $hostname-packages.txt file:"
+    # echo "Installed packages in $hostname-packages.txt file:"
     # echo "${in_hostname[@]}"
     # echo
     #
-    # echo "Installed packages not in host-packages.txt file:"
+    # echo "Installed packages in host-packages.txt file:"
     # echo "${in_base[@]}"
     # echo
 
-    echo "Installed packages not in either packages.txt file:"
-    echo "${in_neither[@]}"
-    echo
+
+    printf "\nInstalled not in either:\n%s\n\n" "$(printf "%s " "${in_neither[@]}")"
+    # echo
+    # echo "Installed packages not in either packages.txt file:"
+    # echo "${in_neither[@]}"
+    # echo
 
     echo "Check if you want to add any of these packages to a packages.txt file in $packages_dir"
 }
-
-sync_packages
-diff_packages
-# sync_configs
-# sync_services
