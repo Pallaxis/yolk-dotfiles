@@ -36,6 +36,7 @@ gst-plugins-good
 gtk-engine-murrine
 hypridle
 hyprland
+hyprland-protocols
 hyprlang
 hyprlock
 hyprpaper
