@@ -14,30 +14,24 @@ sync_packages() {
 
     # Reads in as space seperated values
     if [[ -f "$hostname_packages_file" && -f "$base_packages_file" ]]; then
-        mapfile -t spaces_hostname_packages < "$hostname_packages_file"
-        mapfile -t spaces_base_packages < "$base_packages_file"
-        mapfile -t spaces_installed_packages < <(pacman -Qeq)
+        mapfile -t hostname_packages < "$hostname_packages_file"
+        mapfile -t base_packages < "$base_packages_file"
+        mapfile -t installed_packages < <(pacman -Qeq)
     else
         echo "Missing 1 or more packages.txt file!"
         exit
     fi
-    # Convert to newline seperated values
-    newline_base_packages=$(echo "${spaces_base_packages[@]}" | tr ' ' '\n')
-    newline_hostname_packages=$(echo "${spaces_hostname_packages[@]}" | tr ' ' '\n')
-    newline_installed_packages=$(echo "${spaces_installed_packages[@]}" | tr ' ' '\n')
-    # Combine and sort the final list
-    newline_combined_packages=$(printf "%s\n" "${newline_base_packages[@]}" "${newline_hostname_packages[@]}" | sort)
-    spaces_combined_packages+=("${spaces_hostname_packages[@]}" "${spaces_base_packages[@]}")
+    combined_packages+=("${hostname_packages[@]}" "${base_packages[@]}")
 
     echo "Starting by updating system..."
     yay -Syu --answerdiff All
 
     echo "Ensuring $hostname's packages & base packages are installed..."
-    yay -S --needed "${spaces_combined_packages[@]}"
+    yay -S --needed "${combined_packages[@]}"
 
     # Unneeded as I have a function for diffing now
     # printf "\nExplicitly installed packages not in either list:\n"
-    # comm -23 <(printf "%s\n" "${newline_installed_packages[@]}" | sort) <(printf "%s\n" "${newline_combined_packages[@]}" | sort)
+    # comm -23 <(printf "%s\n" "${installed_packages[@]}" | sort) <(printf "%s\n" "${combined_packages[@]}" | sort)
 }
 
 sync_configs() {
