@@ -16,7 +16,12 @@ export let eggs = #{
     nvim: "~/.config/nvim/",
     qt5ct: "~/.config/qt5ct/",
     qt6ct: "~/.config/qt6ct/",
-    qutebrowser: #{ targets: "~/.config/qutebrowser/", strategy: "merge" },
+    qutebrowser: #{
+        targets: #{
+            "config.py": "~/.config/qutebrowser/config.py",
+            "slack-annoyances.js": "~/.local/share/qutebrowser/greasemonkey/slack-annoyances.js",
+        },
+    },
     rofi: "~/.config/rofi/",
     systemd: #{ targets: "~/.config/systemd/user/", strategy: "merge" },
     tealdeer: "~/.config/tealdeer/",
