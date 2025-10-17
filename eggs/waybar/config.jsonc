@@ -112,8 +112,8 @@
         "format": "{}",
         "tooltip": true,
         "interval": 5,
-        "min-length": 8,
-        "max-length": 8
+        "min-length": 6,
+        "max-length": 6
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",
