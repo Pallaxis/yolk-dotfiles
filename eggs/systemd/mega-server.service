@@ -1,0 +1,10 @@
+[Unit]
+Description=Keeps Mega server running
+
+[Service]
+ExecStart=/usr/bin/mega-cmd-server
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
