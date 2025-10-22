@@ -21,6 +21,14 @@ stty -ixon											# Disables XON/XOFF flow control
 stty -ixoff											# Disables sending of start/stop characters
 
 # Functions
+ssh-host() {
+    # Pulls the IP from .ssh config for supplied arg
+    if [[ $# -ne 1 ]]; then
+	echo "Supply only one arg to pull from ssh config"
+	return 1
+    fi
+    ssh -G $1 | awk '/^hostname/{print $2}'
+}
 stopwatch() {
     start=$(date +%s)
     while true; do
@@ -67,9 +75,14 @@ zinit snippet OMZP::git
 zinit snippet OMZP::sudo
 zinit snippet OMZP::command-not-found
 
+### EXPORTS
+
 # System FZF settings
 export FZF_CTRL_T_COMMAND="fd --hidden --strip-cwd-prefix --exclude git"
 export FZF_DEFAULT_OPTS="--preview-window=up:70% --bind=ctrl-d:page-down,ctrl-u:page-up --color=query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7"
+
+# Uses bat as manpager (replaces bat-extras package)
+export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
 
 # Completion
 zstyle ':completion:*:git-checkout:*' sort false
@@ -203,9 +216,6 @@ PROMPT=$'\n''%F{#89b4fa}%~%f ${LAST_EXIT}'$'\n''%F{#cba6f7}%f '
 RPROMPT="${vcs_info_msg_0_}"
 zstyle ':vcs_info:git:*' formats '%F{240}%b %f %F{237}%r%f'
 zstyle ':vcs_info:*' enable git
-
-# Uses bat as manpager (replaces bat-extras package)
-export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
 
 # Shell integrations
 eval "$(fzf --zsh)"

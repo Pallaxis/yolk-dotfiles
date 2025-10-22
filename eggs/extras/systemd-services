@@ -1,5 +1,6 @@
 hyprpaper.service
 hypridle.service
+restic-backup.timer
 waybar.service
 ssh-agent.service
 hyprpolkitagent.service

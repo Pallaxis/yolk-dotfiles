@@ -22,6 +22,7 @@ export let eggs = #{
             "slack-annoyances.js": "~/.local/share/qutebrowser/greasemonkey/slack-annoyances.js",
         },
     },
+    restic: "~/.config/restic",
     rofi: "~/.config/rofi/",
     systemd: #{ targets: "~/.config/systemd/user/", strategy: "merge" },
     tealdeer: "~/.config/tealdeer/",

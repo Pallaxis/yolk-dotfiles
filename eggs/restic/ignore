@@ -1,0 +1,5 @@
+git/
+.cache/
+work/firmware/
+work/projects/burnin-tests
+tmp/
