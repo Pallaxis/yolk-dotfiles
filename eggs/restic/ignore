@@ -1,5 +1,6 @@
-git/
 .cache/
+.local/share/Trash/
+git/
+tmp/
 work/firmware/
 work/projects/burnin-tests
-tmp/
