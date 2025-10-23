@@ -48,6 +48,6 @@ window#waybar {
   color: red;
 }
 
-#custom-update, #network, #custom-ram-usage, #custom-cpu-usage, #custom-cpu-temp, #battery, #tray, #custom-notifications{
+#custom-update, #network, #custom-ram-usage, #custom-cpu-usage, #custom-cpu-temp, #battery, #tray, #custom-notifications, #privacy{
   padding: 0px 3px;
 }

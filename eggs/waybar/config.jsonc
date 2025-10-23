@@ -5,7 +5,7 @@
     "layer": "middle",
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock#date", "idle_inhibitor", "clock#time"],
-    "modules-right": ["custom/kernel-check", "systemd-failed-units", "tray", "custom/update", "network", "custom/ram-usage", "custom/cpu-usage", "custom/cpu-temp", "pulseaudio", "battery", "custom/notifications"],
+    "modules-right": ["custom/kernel-check", "systemd-failed-units", "tray", "custom/update", "network", "custom/ram-usage", "custom/cpu-usage", "custom/cpu-temp", "pulseaudio", "battery", "custom/notifications", "privacy"],
 
     "hyprland/workspaces": {
         "format": "{icon}",
@@ -157,5 +157,13 @@
         "tooltip": true,
         "interval": 5,
         "on-click": "dunstctl history-clear"
+    },
+    "privacy": {
+        "ignore": [
+            {
+                "type": "screenshare",
+                "name": "obs"
+            },
+        ]
     },
 }
