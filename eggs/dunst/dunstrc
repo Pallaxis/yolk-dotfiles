@@ -23,3 +23,7 @@ history_ignore = true
 [Firefox]
 appname = "Firefox"
 default_icon = "/usr/share/icons/hicolor/scalable/apps/firefox.svg"
+
+[slackbot]
+summary = "*Slackbot*"
+history_ignore = true
