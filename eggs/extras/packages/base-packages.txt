@@ -11,12 +11,10 @@ brightnessctl
 btop
 calc
 caligula
-chaotic-keyring
-chaotic-mirrorlist
+catppuccin-gtk-theme-git
 cowsay
 cups
 darkly-bin
-deja-dup
 dunst
 exfat-utils
 expac
@@ -64,6 +62,7 @@ nm-connection-editor
 nmap
 noto-fonts-emoji
 npm
+nss-mdns
 ntfs-3g
 obs-studio
 openssh
@@ -84,6 +83,7 @@ qt6ct
 qutebrowser
 rclone
 reflector
+restic
 ripgrep
 rofi
 rsync
@@ -91,6 +91,7 @@ samba
 socat
 sshfs
 sudo
+syncthing
 tcpdump
 tealdeer
 tesseract
@@ -101,6 +102,7 @@ ttf-jetbrains-mono-nerd
 ttf-nerd-fonts-symbols-common
 udiskie
 ufw
+unzip
 usbutils
 waybar
 waybar-module-pacman-updates-git

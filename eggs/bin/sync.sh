@@ -42,6 +42,10 @@ sync_configs() {
         username=$USER
     fi
 
+    # GTK3/4
+    gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-Blue-Dark"
+    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+
     echo "$username ALL=(ALL) NOPASSWD: /usr/bin/pacman -Syu --noconfirm" | sudo tee /etc/sudoers.d/01_"$username"
     echo "$username ALL=(ALL) NOPASSWD: /usr/bin/checkupdates -d" | sudo tee /etc/sudoers.d/01_checkupdates
 
