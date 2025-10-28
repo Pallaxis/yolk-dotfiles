@@ -125,7 +125,7 @@
         },
         "tooltip": true,
         "tooltip-format": "Device: {desc}",
-        "on-click": "uwsm app -- pavucontrol",
+        "on-click": "pavucontrol",
         "on-scroll-up": "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%+",
         "on-scroll-down": "wpctl set-volume -l 1.4 @DEFAULT_AUDIO_SINK@ 5%-",
         "min-length": 6,
