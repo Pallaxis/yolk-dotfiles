@@ -27,3 +27,7 @@ default_icon = "/usr/share/icons/hicolor/scalable/apps/firefox.svg"
 [slackbot]
 summary = "*Slackbot*"
 history_ignore = true
+
+[udiskie]
+appname = "udiskie"
+history_ignore = true
