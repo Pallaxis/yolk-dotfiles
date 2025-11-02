@@ -182,6 +182,7 @@ alias ygl='yolk git log --decorate --graph --all'
 # alias yglo='yolk git log --oneline --decorate --graph --all'
 alias yglo='yolk git log --graph --pretty="%C(#89b4fa)%h%Creset -%C(auto)%d%Creset %s %C(#a6e3a1)(%ad) %C(bold #cba6f7)<%an>%Creset"'
 alias glo='git log --graph --pretty="%C(#89b4fa)%h%Creset -%C(auto)%d%Creset %s %C(#a6e3a1)(%ad) %C(bold #cba6f7)<%an>%Creset"'
+alias ygd='yolk git diff'
 
 # Load completions (Must be done after fzf-tab)
 autoload -Uz compinit && compinit
