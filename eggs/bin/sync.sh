@@ -83,6 +83,11 @@ EOF
 PermitRootLogin no
 EOF
 
+# SSH Agent setting
+    sudo tee /etc/ssh/ssh_config.d/50-ssh-agent-add-keys.conf >/dev/null <<EOF
+AddKeysToAgent yes
+EOF
+
 sudo systemctl try-restart sshd.service
 
 # UFW
