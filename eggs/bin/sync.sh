@@ -3,9 +3,6 @@
 
 sync_packages() {
     # Takes hostname's packages and installs along with a list of base packages
-    # TODO: Really messy with newline seperated/space space seperated arrays.
-    # change to just convert one way when I need to, probably just before using it in yay
-    # as that would make all other operations easier
     local hostname
     hostname=$(hostnamectl hostname)
     local packages_dir=$HOME/.config/yolk/eggs/extras/packages
@@ -16,7 +13,7 @@ sync_packages() {
     if [[ -f "$hostname_packages_file" && -f "$base_packages_file" ]]; then
         mapfile -t hostname_packages < "$hostname_packages_file"
         mapfile -t base_packages < "$base_packages_file"
-        mapfile -t installed_packages < <(pacman -Qeq)
+        # mapfile -t installed_packages < <(pacman -Qeq)
     else
         echo "Missing 1 or more packages.txt file!"
         exit
@@ -38,27 +35,26 @@ sync_configs() {
     # Writes my config files as sudo to /etc/ dirs
     if [[ -n $SUDO_USER ]]; then
         echo "Don't run script as root"
-    else
-        username=$USER
+        exit
     fi
 
     # GTK3/4
     gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-Blue-Dark"
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
-    echo "$username ALL=(ALL) NOPASSWD: /usr/bin/pacman -Syu --noconfirm" | sudo tee /etc/sudoers.d/01_"$username"
-    echo "$username ALL=(ALL) NOPASSWD: /usr/bin/checkupdates -d" | sudo tee /etc/sudoers.d/01_checkupdates
+    echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/pacman -Syu --noconfirm" | sudo tee /etc/sudoers.d/01_"$USER"
+    echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/checkupdates -d" | sudo tee /etc/sudoers.d/01_checkupdates
 
     # Keyd, fix to recognise the virtual keyboard as a real keyboard
     # this fixes the auto touchpad disable
-    cat << EOF | sudo tee /etc/libinput/local-overrides.quirks
+    sudo tee /etc/libinput/local-overrides.quirks >/dev/null <<EOF
 [Serial Keyboards]
 MatchUdevType=keyboard
 MatchName=keyd virtual keyboard
 AttrKeyboardIntegration=internal
 EOF
     # Keyd config
-    cat << EOF | sudo tee /etc/keyd/default.conf
+    sudo tee /etc/keyd/default.conf >/dev/null <<EOF
 [ids]
 * = *
 
@@ -79,11 +75,11 @@ sudo sed -i \
 --sort rate' /etc/xdg/reflector/reflector.conf
 
 # SSHD config hardening
-    cat << EOF | sudo tee /etc/ssh/sshd_config.d/20-force_public_key_auth.conf
+    sudo tee /etc/ssh/sshd_config.d/20-force_public_key_auth.conf >/dev/null <<EOF
 PasswordAuthentication no
 AuthenticationMethods publickey
 EOF
-    cat << EOF | sudo tee /etc/ssh/sshd_config.d/20-disallow_root_login.conf
+    sudo tee /etc/ssh/sshd_config.d/20-disallow_root_login.conf >/dev/null <<EOF
 PermitRootLogin no
 EOF
 
