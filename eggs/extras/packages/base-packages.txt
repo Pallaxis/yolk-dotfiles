@@ -75,6 +75,7 @@ pipewire-jack
 pipewire-pulse
 pkgfile
 pkgstats
+playerctl
 python-adblock
 qbittorrent
 qt5-wayland

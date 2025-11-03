@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+show_usage() {
+  echo "Usage: screenshot-tool [command] [options]"
+  echo ""
+  echo "Commands:"
+  echo "  freeze-area               Install and configure Windows VM"
+  echo "  freeze-area-save          Remove Windows VM and optionally its data"
+  echo "  copy-focused-monitor      Stop the running Windows VM"
+  echo "  copy-all-monitors         Show current VM status"
+  echo "  help                      Show this help message"
+  echo ""
+}
+
+# Main command dispatcher
+case "$1" in
+  freeze-area)
+    grimblast --freeze copy area
+    ;;
+  freeze-area-save)
+    grimblast --freeze copysave area "$HOME/media/images/screenshots/screenshot-$(date +%F_%H-%M-%S).png"
+    ;;
+  copy-focused-monitor)
+    grimblast copy output
+    ;;
+  copy-all-monitors)
+    grimblast copy screen
+    ;;
+  help|--help|-h|"")
+    show_usage
+    ;;
+  *)
+    echo "Unknown command: $1" >&2
+    echo "" >&2
+    show_usage >&2
+    exit 1
+    ;;
+esac
