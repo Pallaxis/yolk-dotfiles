@@ -205,6 +205,16 @@ return {
             },
           },
         },
+
+        -- pylsp = {
+        --   settings = {
+        --     pylsp = {
+        --       plugins = {
+        --         pycodestyle = { enabled = { false } },
+        --       },
+        --     },
+        --   },
+        -- },
       }
 
       -- Ensure the servers and tools above are installed
@@ -224,9 +234,9 @@ return {
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         -- "pylint", -- Python linter
-        "pylsp", -- Python LSP server
+        -- "pylsp", -- Python LSP server
         -- "markdownlint", -- Markdown linter
-        -- "pyright", -- Python static type checker
+        "pyright", -- Python static type checker
         "yaml-language-server", -- yaml
         "hyprls", -- Hyprlang
         "qmlls", -- qml

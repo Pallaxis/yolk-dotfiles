@@ -45,6 +45,18 @@ countdown() {
     done
     notify-send Countdown Completed!
 }
+udm() {
+    udisksctl mount -b "$1" > /dev/null 2>&1
+    drive_mountpoint=$(udisksctl info -b "$1" | awk '/MountPoints:/ {print $2}')
+    cd "$drive_mountpoint" || echo "cd failed"
+}
+udu() {
+    drive_mountpoint=$(udisksctl info -b "$1" | awk '/MountPoints:/ {print $2}')
+    if [[ -n "$drive_mountpoint" && "$PWD" == "$drive_mountpoint" ]]; then
+	cd '..'
+    fi
+    udisksctl unmount -b "$1"
+}
 
 # Zinit stuff
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"				# Set the directory we want to store zinit and plugins
