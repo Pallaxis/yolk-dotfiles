@@ -1,26 +1,42 @@
-# Autostarting stuff
+#
+# Autostarts
+#
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
     exec Hyprland
 fi
-# if [[ -z $TMUX ]]; then
-#     if uwsm check may-start; then
-# 	exec uwsm start hyprland.desktop
-#     fi
-# fi
-
 # Make general or attach to it if it's already running
 if [[ -z $(tmux list-sessions) ]]; then
     tmux new-session -s general
 elif [[ -z $(tmux list-clients) ]]; then
     tmux new-session -A -s general
 fi
-
 # Sending commands on terminal launch
-fastfetch											# Shows a sick ass fetch
-stty -ixon											# Disables XON/XOFF flow control
-stty -ixoff											# Disables sending of start/stop characters
+# fastfetch											# Shows a sick ass fetch
+# fortune | cowsay | lolcat -p 1000								# Shows a sick ass wise cow
 
+#
+# Zinit
+#
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"				# Set the directory we want to store zinit and plugins
+if [ ! -d "$ZINIT_HOME" ]; then									# Download Zinit, if it's not there yet
+    mkdir -p "$(dirname $ZINIT_HOME)"
+    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+source "${ZINIT_HOME}/zinit.zsh"								# Source/Load zinit
+
+# Add in zsh plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+# Add in snippets
+zinit snippet OMZP::git
+zinit snippet OMZP::sudo
+zinit snippet OMZP::command-not-found
+
+#
 # Functions
+#
 ssh-host() {
     # Pulls the IP from .ssh config for supplied arg
     if [[ $# -ne 1 ]]; then
@@ -57,15 +73,6 @@ udu() {
     fi
     udisksctl unmount -b "$1"
 }
-
-# Zinit stuff
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"				# Set the directory we want to store zinit and plugins
-if [ ! -d "$ZINIT_HOME" ]; then									# Download Zinit, if it's not there yet
-    mkdir -p "$(dirname $ZINIT_HOME)"
-    git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
-source "${ZINIT_HOME}/zinit.zsh"								# Source/Load zinit
-
 # Checks a dir exists & is not in path, then prepends to PATH
 add_paths() {
   for directory in "$@"; do
@@ -74,29 +81,20 @@ add_paths() {
 }
 add_paths ~/.local/bin
 
-# Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
-# zinit ice compile'(pure|async).zsh' pick'async.zsh' src'pure.zsh'
-# zinit light sindresorhus/pure
 
-# Add in snippets
-zinit snippet OMZP::git
-zinit snippet OMZP::sudo
-zinit snippet OMZP::command-not-found
-
-### EXPORTS
+#
+# Exports
+#
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # System FZF settings
 export FZF_CTRL_T_COMMAND="fd --hidden --strip-cwd-prefix --exclude git"
 export FZF_DEFAULT_OPTS="--preview-window=up:70% --bind=ctrl-d:page-down,ctrl-u:page-up --color=query:#89b4fa,hl:#f7b3e2,hl:#cba6f7,hl+:#cba6f7,selected-hl:#89b4fa,fg:#89b4fa,fg+:#89b4fa,bg+:#313244,info:#cba6f7,border:#cba6f7,pointer:#cba6f7,marker:#cba6f7"
-
 # Uses bat as manpager (replaces bat-extras package)
 export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -p -lman'"
 
+#
 # Completion
+#
 zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
@@ -114,14 +112,6 @@ zstyle ':fzf-tab:*' fzf-min-height 20 # Opens in tmux popup window
 # zstyle ':fzf-tab:*' popup-min-size 200 40 # Sizes for tmux window
 zstyle ':fzf-tab:complete:systemctl-*:*' fzf-preview 'SYSTEMD_COLORS=1 systemctl status $word' # Systemctl status
 zstyle ':fzf-tab:complete:(-command-|-parameter-|-brace-parameter-|export|unset|expand):*' fzf-preview 'echo ${(P)word}' # Environment variables
-
-# Prompt styling
-# zstyle :prompt:pure:git:stash show yes
-# zstyle ':prompt:pure:prompt:success' color '#cba6f7'
-# zstyle ':prompt:pure:prompt:error' color '#f38ba8'
-# zstyle ':prompt:pure:prompt:continuation' color '#cba6f7'
-# zstyle ':prompt:pure:git:branch' color '#b4befe'
-# zstyle ':prompt:pure:git:dirty' color '#f2cdcd'
 
 # Keybindings
 WORDCHARS=${WORDCHARS/\/}							# Allows deleting up to / as a word
@@ -146,8 +136,12 @@ setopt hist_find_no_dups
 
 setopt extended_glob 
 setopt autocd
+# setopt no_flow_control
+setopt prompt_subst
 
-# Helpful aliases
+#
+# Aliases
+#
 alias c='clear'									# Clear terminal
 alias l='eza -lh --icons=auto'							# Long list
 alias ls='eza -1 --icons=auto'							# Short list
@@ -159,7 +153,6 @@ alias lm='eza --icons=auto --sort=modified --long --modified --header --no-permi
 #pacman -Qeq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
 #pacman -Qdtq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rns {})'
 #pacman -Qq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
-
 
 # Handy change dir shortcuts
 alias -- -='cd -'
@@ -196,24 +189,14 @@ alias yglo='yolk git log --graph --pretty="%C(#89b4fa)%h%Creset -%C(auto)%d%Cres
 alias glo='git log --graph --pretty="%C(#89b4fa)%h%Creset -%C(auto)%d%Creset %s %C(#a6e3a1)(%ad) %C(bold #cba6f7)<%an>%Creset"'
 alias ygd='yolk git diff'
 
-# Load completions (Must be done after fzf-tab)
-autoload -Uz compinit && compinit
-zinit cdreplay -q
-
-# Loading prompt
-# autoload -U promptinit; promptinit
-# prompt pure
-
-# Configuring my prompt
-autoload -Uz vcs_info
-precmd_vcs_info() {
-  if command git rev-parse --is-inside-work-tree &>/dev/null; then
-    vcs_info
-  else
-    vcs_info_msg_0_=''
-  fi
-}
-precmd_show_status() {
+# For my prompt, git status
+precmd() {
+    if git rev-parse --is-inside-work-tree &>/dev/null; then
+	vcs_info
+	RPROMPT="${vcs_info_msg_0_}"
+    else
+	RPROMPT=""
+    fi
     local exit_code=$?
     if [[ $exit_code -eq 1 ]]; then
 	LAST_EXIT="%F{red}$exit_code%f "
@@ -223,12 +206,17 @@ precmd_show_status() {
 	LAST_EXIT=""
     fi
 }
-precmd_functions+=(precmd_vcs_info precmd_show_status)
-setopt prompt_subst
+# Configuring my prompt
+autoload -Uz vcs_info
+precmd_functions+=(precmd)
 PROMPT=$'\n''%F{#89b4fa}%~%f ${LAST_EXIT}'$'\n''%F{#cba6f7}%f '
 RPROMPT="${vcs_info_msg_0_}"
 zstyle ':vcs_info:git:*' formats '%F{240}%b %f %F{237}%r%f'
 zstyle ':vcs_info:*' enable git
+
+# Load completions (Must be done after fzf-tab)
+autoload -Uz compinit && compinit
+zinit cdreplay -q
 
 # Shell integrations
 eval "$(fzf --zsh)"
