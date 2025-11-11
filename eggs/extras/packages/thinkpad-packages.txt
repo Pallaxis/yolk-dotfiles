@@ -7,7 +7,6 @@ ddcutil
 dpkg
 intel-ucode
 krita
-lolcat
 lshw
 megacmd-bin
 tio

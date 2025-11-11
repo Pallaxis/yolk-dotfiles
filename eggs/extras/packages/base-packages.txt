@@ -9,6 +9,7 @@ bluez
 bluez-utils
 brightnessctl
 btop
+c-lolcat
 calc
 caligula
 catppuccin-gtk-theme-git
@@ -76,6 +77,7 @@ pipewire-pulse
 pkgfile
 pkgstats
 playerctl
+plymouth
 python-adblock
 qbittorrent
 qt5-wayland

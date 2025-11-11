@@ -1,6 +1,6 @@
 [Desktop Entry]
 Version=1.0
-Name=Slack
+Name=Slack-Web
 Comment=Slack
 Exec=qutebrowser --target=window 'https://app.slack.com/client'
 Terminal=false

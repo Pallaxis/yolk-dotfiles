@@ -12,7 +12,7 @@ elif [[ -z $(tmux list-clients) ]]; then
 fi
 # Sending commands on terminal launch
 # fastfetch											# Shows a sick ass fetch
-# fortune | cowsay | lolcat -p 1000								# Shows a sick ass wise cow
+fortune | cowsay | lolcat -b -r									# Shows a sick ass wise cow
 
 #
 # Zinit
@@ -25,9 +25,9 @@ fi
 source "${ZINIT_HOME}/zinit.zsh"								# Source/Load zinit
 
 # Add in zsh plugins
-zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-syntax-highlighting
 zinit light Aloxaf/fzf-tab
 # Add in snippets
 zinit snippet OMZP::git
@@ -136,7 +136,7 @@ setopt hist_find_no_dups
 
 setopt extended_glob 
 setopt autocd
-# setopt no_flow_control
+setopt no_flow_control
 setopt prompt_subst
 
 #
@@ -215,7 +215,13 @@ zstyle ':vcs_info:git:*' formats '%F{240}%b %f %F{237}%r%f'
 zstyle ':vcs_info:*' enable git
 
 # Load completions (Must be done after fzf-tab)
-autoload -Uz compinit && compinit
+autoload -Uz compinit
+# Only compinit once a day to speed up loading
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
+    compinit
+else
+    compinit -C
+fi
 zinit cdreplay -q
 
 # Shell integrations
