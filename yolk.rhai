@@ -11,6 +11,7 @@ export let eggs = #{
     dunst: "~/.config/dunst/",
     extras: #{ enabled: false },
     fastfetch: "~/.config/fastfetch/",
+    foot: "~/.config/foot/",
     hypr: #{ targets: "~/.config/hypr/", templates: [ "hyprland-settings/windowrules.conf", "hyprland-settings/env.conf" ] },
     kitty: "~/.config/kitty/",
     nvim: "~/.config/nvim/",
