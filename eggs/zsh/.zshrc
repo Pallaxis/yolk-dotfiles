@@ -13,6 +13,7 @@ fi
 # Sending commands on terminal launch
 # fastfetch											# Shows a sick ass fetch
 fortune | cowsay | lolcat -b -r									# Shows a sick ass wise cow
+# echo "$(( $(date '+%Y') + 1 ))" "is the year of the linux desktop" | cowsay | lolcat -b -r
 
 #
 # Zinit

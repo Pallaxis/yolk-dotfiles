@@ -55,6 +55,7 @@ linux-headers
 localsend-bin
 lsof
 man-db
+megacmd-bin
 mesa-utils
 neovim
 net-tools
@@ -63,7 +64,6 @@ nm-connection-editor
 nmap
 noto-fonts-emoji
 npm
-nss-mdns
 ntfs-3g
 obs-studio
 openssh

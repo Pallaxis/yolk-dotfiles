@@ -1,13 +1,10 @@
 ansible
 ansible-core
-asciiquarium
 audacity
 chromium
 ddcutil
 dpkg
 intel-ucode
 krita
-lshw
-megacmd-bin
 tio
 uv
