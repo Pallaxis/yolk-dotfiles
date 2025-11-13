@@ -192,13 +192,13 @@ alias ygd='yolk git diff'
 
 # For my prompt, git status
 precmd() {
+    local exit_code=$?
     if git rev-parse --is-inside-work-tree &>/dev/null; then
 	vcs_info
 	RPROMPT="${vcs_info_msg_0_}"
     else
 	RPROMPT=""
     fi
-    local exit_code=$?
     if [[ $exit_code -eq 1 ]]; then
 	LAST_EXIT="%F{red}$exit_code%f "
     elif [[ $exit_code -ne 0 ]]; then
