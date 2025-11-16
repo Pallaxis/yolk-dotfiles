@@ -80,7 +80,7 @@ add_paths() {
     [[ -d "$directory" && ! "$PATH" =~ (^|:)$directory(:|$) ]] && PATH="$directory:$PATH"
   done
 }
-add_paths ~/.local/bin
+add_paths ~/.local/bin ~/.local/share/system-setup/bin
 
 
 #

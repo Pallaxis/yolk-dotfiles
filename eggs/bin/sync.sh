@@ -42,19 +42,19 @@ sync_configs() {
     gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-Blue-Dark"
     gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
-    echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/pacman -Syu --noconfirm" | sudo tee /etc/sudoers.d/01_"$USER"
-    echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/checkupdates -d" | sudo tee /etc/sudoers.d/01_checkupdates
+    echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/pacman -Syu --noconfirm" | sudo tee /etc/sudoers.d/01_"$USER" > /dev/null
+    echo "$USER ALL=(ALL) NOPASSWD: /usr/bin/checkupdates -d" | sudo tee /etc/sudoers.d/01_checkupdates > /dev/null
 
     # Keyd, fix to recognise the virtual keyboard as a real keyboard
     # this fixes the auto touchpad disable
-    sudo tee /etc/libinput/local-overrides.quirks >/dev/null <<EOF
+    sudo tee /etc/libinput/local-overrides.quirks > /dev/null <<EOF
 [Serial Keyboards]
 MatchUdevType=keyboard
 MatchName=keyd virtual keyboard
 AttrKeyboardIntegration=internal
 EOF
     # Keyd config
-    sudo tee /etc/keyd/default.conf >/dev/null <<EOF
+    sudo tee /etc/keyd/default.conf > /dev/null <<EOF
 [ids]
 * = *
 
@@ -75,24 +75,68 @@ sudo sed -i \
 --sort rate' /etc/xdg/reflector/reflector.conf
 
 # SSHD config hardening
-    sudo tee /etc/ssh/sshd_config.d/20-force_public_key_auth.conf >/dev/null <<EOF
+    sudo tee /etc/ssh/sshd_config.d/20-force_public_key_auth.conf > /dev/null <<EOF
 PasswordAuthentication no
 AuthenticationMethods publickey
 EOF
-    sudo tee /etc/ssh/sshd_config.d/20-disallow_root_login.conf >/dev/null <<EOF
+    sudo tee /etc/ssh/sshd_config.d/20-disallow_root_login.conf > /dev/null <<EOF
 PermitRootLogin no
 EOF
 
 # SSH Agent setting
-    sudo tee /etc/ssh/ssh_config.d/50-ssh-agent-add-keys.conf >/dev/null <<EOF
+    sudo tee /etc/ssh/ssh_config.d/50-ssh-agent-add-keys.conf > /dev/null <<EOF
 AddKeysToAgent yes
 EOF
 
 sudo systemctl try-restart sshd.service
 
+# setting up hosts as described in the arch wiki for avahi
+sudo tee /etc/nsswitch.conf > /dev/null <<EOF
+# Name Service Switch configuration file.
+# See nsswitch.conf(5) for details.
+
+passwd: files systemd
+group: files [SUCCESS=merge] systemd
+shadow: files systemd
+gshadow: files systemd
+
+publickey: files
+
+hosts: mymachines mdns_minimal [NOTFOUND=return] resolve [!UNAVAIL=return] files myhostname dns
+networks: files
+
+protocols: files
+services: files
+ethers: files
+rpc: files
+
+netgroup: files
+EOF
+
 # UFW
-echo "Run this command to setup simple firewall rules:"
-echo "sudo ufw limit ssh && sudo ufw enable"
+cat <<EOF
+My current UFW setup 13/11/25
+ sudo ufw status verbose
+Status: active
+Logging: off
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+6881/tcp (qBittorrent)     ALLOW IN    Anywhere
+5353/udp (Bonjour)         ALLOW IN    Anywhere
+5298 (Bonjour)             ALLOW IN    Anywhere
+22                         LIMIT IN    Anywhere
+22000 (syncthing)          ALLOW IN    Anywhere
+21027/udp (syncthing)      ALLOW IN    Anywhere
+6881/tcp (qBittorrent (v6)) ALLOW IN    Anywhere (v6)
+5353/udp (Bonjour (v6))    ALLOW IN    Anywhere (v6)
+5298 (Bonjour (v6))        ALLOW IN    Anywhere (v6)
+22 (v6)                    LIMIT IN    Anywhere (v6)
+22000 (syncthing (v6))     ALLOW IN    Anywhere (v6)
+21027/udp (syncthing (v6)) ALLOW IN    Anywhere (v6)
+EOF
 }
 
 sync_services(){
