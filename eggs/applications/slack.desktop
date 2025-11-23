@@ -1,9 +1,0 @@
-[Desktop Entry]
-Version=1.0
-Name=Slack-Web
-Comment=Slack
-Exec=qutebrowser --target=window 'https://app.slack.com/client'
-Terminal=false
-Type=Application
-Icon=~/.local/share/applications/icons/slack.png
-StartupNotify=true
