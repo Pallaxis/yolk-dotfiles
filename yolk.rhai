@@ -25,6 +25,7 @@ export let eggs = #{
     },
     restic: "~/.config/restic",
     rofi: "~/.config/rofi/",
+    systemsetup: "~/.local/share/system-setup",
     systemd: #{ targets: "~/.config/systemd/user/", strategy: "merge" },
     tealdeer: "~/.config/tealdeer/",
     tio: "~/.config/tio/",

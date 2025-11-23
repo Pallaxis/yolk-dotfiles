@@ -1,0 +1,13 @@
+bibata-cursor-theme
+c-lolcat
+catppuccin-gtk-theme-git
+darkly-bin
+grimblast-git
+gtk-engine-murrine
+localsend-bin
+megacmd-bin
+slack-desktop
+tio
+waybar-module-pacman-updates-git
+yay
+yolk

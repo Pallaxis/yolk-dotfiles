@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+source "$setup_install/preflight/guard"
+source "$setup_install/preflight/pacman"

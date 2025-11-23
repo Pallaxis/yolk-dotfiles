@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+source "$setup_install/packaging/base"
+source "$setup_install/packaging/aur"
+source "$setup_install/packaging/host-specific"
