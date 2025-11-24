@@ -4,7 +4,7 @@ set -e
 
 # Used in package emergencies if a bad package has been pushed and we can't revoke.
 # Requires manually installing the good package using sudo pacman -U <url>
-ignored_packages=$(pkg-ignored)
+ignored_packages=$(pkg-ignored.sh)
 
 echo -e "\e[32m\nUpdate system packages\e[0m"
 [[ -n $ignored_packages ]] && echo "sudo pacman -Syu --noconfirm --ignore \"$ignored_packages\""
@@ -12,7 +12,7 @@ sudo pacman -Syu --noconfirm --ignore "$ignored_packages"
 
 # Update AUR packages if any are installed
 if pacman -Qem >/dev/null; then
-  if pkg-aur-accessible; then
+  if pkg-aur-accessible.sh; then
     echo -e "\e[32m\nUpdate AUR packages\e[0m"
     [[ -n $ignored_packages ]] && echo "yay -Sua --noconfirm  --ignore \"$ignored_packages\""
     yay -Sua --noconfirm --answerdiff --ignore "$ignored_packages"

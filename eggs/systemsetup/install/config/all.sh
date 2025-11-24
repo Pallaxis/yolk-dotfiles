@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+source "$setup_install/config/gnome-settings.sh"
+source "$setup_install/config/gnome-settings.sh"
+source "$setup_install/config/keyd.sh"
+source "$setup_install/config/libinput.sh"
+source "$setup_install/config/mega.sh"
+source "$setup_install/config/mime-types.sh"
+source "$setup_install/config/nsswitch.sh"
+source "$setup_install/config/reflector.sh"
+source "$setup_install/config/restic.sh"
+source "$setup_install/config/ssh.sh"
+source "$setup_install/config/sudoers.sh"
+source "$setup_install/config/syncthing.sh"
+source "$setup_install/config/ufw.sh"

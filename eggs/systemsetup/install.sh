@@ -9,6 +9,6 @@ export setup_install="$setup_path/install"
 export PATH="$setup_path/bin:$PATH"
 
 # run it
-source "$setup_install/preflight/all"
-source "$setup_install/packaging/all"
-source "$setup_install/config/all"
+source "$setup_install/preflight/all.sh"
+source "$setup_install/packaging/all.sh"
+source "$setup_install/config/all.sh"

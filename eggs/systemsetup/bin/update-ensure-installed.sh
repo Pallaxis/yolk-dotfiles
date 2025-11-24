@@ -13,4 +13,4 @@ if ! gum confirm "Continue with sync?"; then
   exit
 fi
 
-source "$setup_install/packaging/all" 
+source "$setup_install/packaging/all.sh"

@@ -21,5 +21,5 @@ yay_running=$(pidof yay)
 
 if [[ -z $pacman_running && -z $yay_running ]]; then
     # tmux send-keys -t "$session_name" "$HOME/.local/bin/update.sh" Enter
-    tmux new-window -t $session_name:1 -k -n "Update" "$HOME/.local/share/system-setup/bin/update"
+    tmux new-window -t $session_name:1 -k -n "Update" "$HOME/.local/share/system-setup/bin/update.sh"
 fi
