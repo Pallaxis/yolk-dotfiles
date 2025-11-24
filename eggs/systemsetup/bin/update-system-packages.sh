@@ -14,8 +14,8 @@ sudo pacman -Syu --noconfirm --ignore "$ignored_packages"
 if pacman -Qem >/dev/null; then
   if pkg-aur-accessible.sh; then
     echo -e "\e[32m\nUpdate AUR packages\e[0m"
-    [[ -n $ignored_packages ]] && echo "yay -Sua --noconfirm  --ignore \"$ignored_packages\""
-    yay -Sua --noconfirm --answerdiff --ignore "$ignored_packages"
+    [[ -n $ignored_packages ]] && echo "yay -Sua --noconfirm --answerdiff All --ignore \"$ignored_packages\""
+    yay -Sua --noconfirm --answerdiff All --ignore "$ignored_packages"
     echo
   else
     echo -e "\e[31m\nAUR is unavailable (so skipping updates)\e[0m"
