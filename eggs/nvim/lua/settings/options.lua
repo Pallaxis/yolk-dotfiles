@@ -27,7 +27,7 @@ vim.opt.list = true
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Sets how tabs will be handled
-vim.opt.tabstop = 8
+vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = -1
 vim.opt.expandtab = true
