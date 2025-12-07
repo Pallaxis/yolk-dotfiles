@@ -174,7 +174,7 @@ alias sudo='sudo '
 alias vi='nvim'
 alias ffplay="ffplay -fflags nobuffer -flags low_delay -probesize 32 -analyzeduration 1"
 alias tree='eza --tree --icons=auto'								# Same as tree but with colours
-alias cat='bat --paging=never --style=plain'					# Cat but with colors
+alias cat='bat --paging=never --style=grid,header-filename'					# Cat but with colors
 alias diff='diff --color'							# Enables color for diffs
 alias info='info --vi-keys'
 alias fd-aged='fd -0 -t d | xargs -0 stat --format "%Y %n" | sort -n'
