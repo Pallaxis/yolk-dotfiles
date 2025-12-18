@@ -143,13 +143,14 @@ setopt prompt_subst
 #
 # Aliases
 #
-alias c='clear'									# Clear terminal
-alias l='eza -lh --icons=auto'							# Long list
-alias ls='eza -1 --icons=auto'							# Short list
-alias ll='eza -lhag --icons=auto --sort=name --group-directories-first'		# Long list all
-alias ld='eza -lhD --icons=auto'						# Long list dirs
-alias lc='eza --icons=auto --sort=created --long --created --header --no-permissions --no-filesize --no-user'		# Sorts most recently created at the top
-alias lm='eza --icons=auto --sort=modified --long --modified --header --no-permissions --no-filesize --no-user'		# Sorts most recently modified at the top
+
+# Eza
+alias ls='eza --icons=auto --sort=type --no-quotes --oneline' # Short list
+alias ll='eza --icons=auto --sort=type --no-quotes --all --long --header --smart-group' # long list
+alias lls='eza --icons=auto --sort=size --no-quotes --all --long --header --total-size --smart-group' # long list with dir sizes shown
+alias lm='eza --icons=auto --sort=modified --no-quotes --all --long --header --smart-group --modified' # sorts by modifed date
+alias lc='eza --icons=auto --sort=created --no-quotes --all --long --header --smart-group --created' # sorts by created date
+alias tree='eza --tree --icons=auto'								# Same as tree but with colours
 
 #pacman -Qeq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
 #pacman -Qdtq | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(sudo pacman -Rns {})'
@@ -163,21 +164,22 @@ alias ..3='cd ../../..'
 alias ..4='cd ../../../..'
 alias ..5='cd ../../../../..'
 
+alias c='clear' # Clear terminal
 alias mkdir='mkdir -p'								# Always mkdir a path (this doesn't inhibit functionality to make a single dir)
 alias cp='cp -r'								# Same for cp
+alias scp='scp -r'
 [ "$TERM" = "xterm-kitty" ] && alias ssh="kitty +kitten ssh"			# Fixes "Error opening terminal: xterm-kitty" when using the default kitty term to open some programs through ssh
 
 # Custom aliases
-alias homeserver='~/.secrets/homeserver'
-alias oraclebox='~/.secrets/oraclebox'
 alias sudo='sudo '
 alias vi='nvim'
 alias ffplay="ffplay -fflags nobuffer -flags low_delay -probesize 32 -analyzeduration 1"
-alias tree='eza --tree --icons=auto'								# Same as tree but with colours
 alias cat='bat --paging=never --style=grid,header-filename'					# Cat but with colors
 alias diff='diff --color'							# Enables color for diffs
 alias info='info --vi-keys'
 alias fd-aged='fd -0 -t d | xargs -0 stat --format "%Y %n" | sort -n'
+alias resolve='avahi-resolve-host-name'
+
 # Yolk aliases
 alias ygst='yolk git status'
 alias yga='yolk git add'
@@ -189,7 +191,6 @@ alias ygl='yolk git log --decorate --graph --all'
 alias yglo='yolk git log --graph --pretty="%C(#89b4fa)%h%Creset -%C(auto)%d%Creset %s %C(#a6e3a1)(%ad) %C(bold #cba6f7)<%an>%Creset"'
 alias glo='git log --graph --pretty="%C(#89b4fa)%h%Creset -%C(auto)%d%Creset %s %C(#a6e3a1)(%ad) %C(bold #cba6f7)<%an>%Creset"'
 alias ygd='yolk git diff'
-alias resolve='avahi-resolve-host-name'
 
 # For my prompt, git status
 precmd() {
