@@ -5,9 +5,9 @@ echo "Configuring mime types..."
 xdg-mime default atril.desktop application/pdf
 
 # Use Qutebrowser as the default browser
-xdg-settings set default-web-browser org.qutebrowser.qutebrowser.desktop
-xdg-mime default org.qutebrowser.qutebrowser.desktop x-scheme-handler/http
-xdg-mime default org.qutebrowser.qutebrowser.desktop x-scheme-handler/https
+xdg-settings set default-web-browser firefox.desktop
+xdg-mime default firefox.desktop x-scheme-handler/http
+xdg-mime default firefox.desktop x-scheme-handler/https
 
 # Open video files with mpv
 xdg-mime default mpv.desktop video/mp4
