@@ -2,7 +2,7 @@
 # Autostarts
 #
 if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
-    exec Hyprland
+    exec start-hyprland
 fi
 # Make general or attach to it if it's already running
 if [[ -z $(tmux list-sessions) ]]; then

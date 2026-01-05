@@ -12,7 +12,7 @@ export let eggs = #{
     extras: #{ enabled: false },
     fastfetch: "~/.config/fastfetch/",
     foot: "~/.config/foot/",
-    hypr: #{ targets: "~/.config/hypr/", templates: [ "hyprland-settings/windowrules.conf", "hyprland-settings/env.conf" ] },
+    hypr: #{ targets: "~/.config/hypr/", templates: [ "hyprland-settings/windowrules.conf", "hyprland-settings/env.conf", "hyprland-settings/exec.conf" ] },
     kitty: "~/.config/kitty/",
     nvim: "~/.config/nvim/",
     qt5ct: "~/.config/qt5ct/",
