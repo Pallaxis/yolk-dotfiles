@@ -44,6 +44,15 @@ while true do
 		if ip then break end
 	end
 
+	-- Provision sensor, modprobe driver
+	-- IMX327
+	tio.write("hydra_provision -i 0 -s 0x0101 0x0103 -s 0x0401 0x0780 -s 0x0402 0x0438 -s 0x0403 0x001e -s 0x0103 0x0101\n")
+
+	tio.expect("~]# ")
+
+	tio.write("hydra\n")
+	tio.expect("~]# ")
+
 	-- Start and pick up stream with ffplay storing pid for later
 	tio.write("oclea_gstreamer_interactive_example -r\n")
 	tio.expect(">>>")
@@ -56,4 +65,11 @@ while true do
 	tio.msleep("8000")
 	print(serial)
 	os.execute("kill -TERM -" .. pid)
+	tio.write("exit\n")
+	tio.expect("~]# ")
+
+	-- remove provision
+	tio.write("hydra_provision -i 0 -e\n")
+
+	tio.expect("~]# ")
 end

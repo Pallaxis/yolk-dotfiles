@@ -56,6 +56,7 @@ while true do
 
 	-- Provision sensor, modprobe driver
 	tio.write("hydra_provision -i 0 -s 0x0101 0x0106 -s 0x0401 0x0f00 -s 0x0402 0x0870 -s 0x0403 0x001e -s 0x0103 0x0101 -s 0x0102 0x0037\n")
+
 	tio.expect("~]# ")
 
 	tio.write("hydra\n")
