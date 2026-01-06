@@ -13,7 +13,7 @@ while true do
 
 	tio.write("hydra_provision -i 0 -e\n")
 	shell_ready()
-	tio.write("hydra\n")
+	-- tio.write("hydra\n")
 	-- tio.write("\n")
 
 	tio.expect("login:")
